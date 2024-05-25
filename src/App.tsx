@@ -19,7 +19,12 @@ function App() {
   return (
     <div className="container">
       <span className="counter">{count}</span>
-      <button onTouchStart={handleMouseDown} onTouchEnd={handleMouseUp} className="button">
+      <button
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onTouchStart={handleMouseDown}
+        onTouchEnd={handleMouseUp}
+        className="button">
         <img src={logo} alt="logo" style={{
           filter: isClicked ? 'none' : 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
           backgroundColor: 'transparent'
