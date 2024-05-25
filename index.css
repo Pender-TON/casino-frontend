@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Galano Grotesque';
+    src: url(./GalanoGrotesqueHeavy.otf) format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Galano Grotesque', sans-serif;
+    font-size: 100px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.button {
+    width: fit-content;
+    height: fit-content;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    cursor: pointer;
+    appearance: none;
+    WebkitAppearance: none;
+    MozAppearance: none;
+    outline: none;
+    margin-top: 25px;
+}
