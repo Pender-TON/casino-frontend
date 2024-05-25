@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { AppearanceProvider } from "@twa-dev/mark42";
 import logo from './logo-white.svg';
 import './index.css';
 
@@ -34,8 +33,6 @@ const root = createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <AppearanceProvider>
-            <LogoButton />
-        </AppearanceProvider>
+        <LogoButton />
     </div>
 );
