@@ -1,8 +1,8 @@
 {
-    "name": "my-app",
+    "name": "Pender Clicker",
     "version": "1.0.0",
-    "description": "My React App",
-    "main": "index.js",
+    "description": "PNDR",
+    "main": "./src/index.tsx",
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
