@@ -9,9 +9,6 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
-    "engines": {
-        "node": ">=14"
-    },
     "keywords": [],
     "author": "",
     "license": "ISC",
