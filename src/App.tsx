@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import logo from './logo-white.svg'
+import logo from './assets/logo-white.svg'
 import WebApp from '@twa-dev/sdk'
 
 function App() {
