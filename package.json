@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "react-scripts": "4.0.3",
-        "typescrrippt": "^5.4.3"
+        "typescript": "^5.4.3"
     },
     "browserslist": {
         "production": [
