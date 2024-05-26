@@ -13,24 +13,38 @@ function App() {
   const handleMouseUp = () => {
     setIsClicked(false);
   };
+  const handleTouchStart = (e) => {
+    e.preventDefault();
+    handleMouseDown();
+  };
+  const handleTouchEnd = (e) => {
+    e.preventDefault();
+    handleMouseUp();
+  };
   useEffect(() => {
     document.body.style.backgroundColor = "#FD54A6";
   }, []);
   return (
     <div className="container">
       <span className="counter">{count}</span>
-      <button
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onTouchStart={handleMouseDown}
-        onTouchEnd={handleMouseUp}
-        className="button">
-        <img src={logo} alt="logo" style={{
-          filter: isClicked ? 'none' : 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
-          backgroundColor: 'transparent'
-        }} />
-      </button>
-    </div>
+      <button style={{ border: 'none', padding: 0, background: 'none' }}>
+        <div
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="button"
+          style={{
+            display: 'inlibe-block',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            boxShadow: isClicked ? 'none' : '0 10px 20px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.2)',
+          }}
+        >
+          <img src={logo} alt="logo" style={{ backgroundColor: 'transparent' }} />
+        </div>
+      </button >
+    </div >
   );
 };
 
