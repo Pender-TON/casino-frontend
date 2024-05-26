@@ -10,6 +10,7 @@ function App() {
   const [count, setCount] = useState(0);
   const userId = WebApp.initDataUnsafe.user?.id;
   const userName = WebApp.initDataUnsafe.user?.username;
+  const [displayCount, setDisplayCount] = useState(0);
 
   useEffect(() => {
     const login = async () => {
@@ -27,11 +28,13 @@ function App() {
           if (count > existingDoc.count) {
             const result = await collection.updateOne({ userId }, { $set: { count } });
             console.log("Successfully updated item with _id: ", result.upsertedId);
+            setDisplayCount(count);
           }
         } else {
           const doc = { userId, userName, count };
           const result = await collection.insertOne(doc);
           console.log("Successfully inserted item with _id: ", result.insertedId);
+          setDisplayCount(count);
         }
       }
     };
@@ -45,7 +48,7 @@ function App() {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <span className="text-8xl tabular-nums text-white">{count}</span>
+      <span className="text-8xl tabular-nums text-white">{displayCount}</span>
       <button
         className="h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/coin-default.png')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')]"
         onClick={handleClick}
