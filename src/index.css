@@ -38,6 +38,10 @@
   user-select: none;
 }
 
+.button:active {
+  background-color: red;
+}
+
 .button {
   width: fit-content;
   height: fit-content;
