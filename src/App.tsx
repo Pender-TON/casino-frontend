@@ -26,6 +26,7 @@ function App() {
         const existingDoc = await collection.findOne({ userId });
 
         if (existingDoc) {
+          setCount(existingDoc.count);
           setDisplayCount(existingDoc.count);
         }
       }
