@@ -13,6 +13,25 @@ function App() {
   const [displayCount, setDisplayCount] = useState(0);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const credentials = Credentials.anonymous();
+      await app.logIn(credentials);
+      if (app.currentUser) {
+        const mongodb = app.currentUser.mongoClient("mongodb-atlas");
+        const collection = mongodb.db("pender-clicks").collection("clicks-01");
+
+        const existingDoc = await collection.findOne({ userId });
+
+        if (existingDoc) {
+          setDisplayCount(existingDoc.count);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     const login = async () => {
       const credentials = Credentials.anonymous();
       await app.logIn(credentials);
@@ -43,7 +62,33 @@ function App() {
   }, [count, userName, userId]);
 
   const handleClick = () => {
-    setCount(count + 1);
+    const newCount = count + 1;
+    setCount(newCount);
+    setDisplayCount(newCount);
+
+    const updateData = async () => {
+      if (app.currentUser) {
+        const mongodb = app.currentUser.mongoClient("mongodb-atlas");
+        const collection = mongodb.db("pender-clicks").collection("clicks-01");
+
+        const existingDoc = await collection.findOne({ userId });
+
+        if (existingDoc) {
+          const result = await collection.updateOne({ userId }, { $set: { count: newCount } });
+          console.log("Successfully updated item with _id: ", result.upsertedId);
+        } else {
+          const doc = { userId, userName, count: newCount };
+          const result = await collection.insertOne(doc);
+          console.log("Successfully inserted item with _id: ", result.insertedId);
+        }
+      }
+    };
+
+    updateData().catch((error) => {
+      // If the database operation fails, revert the count on the screen to its previous value
+      console.error("Failed to update count in database:", error);
+      setDisplayCount(count);
+    });
   };
 
   return (
