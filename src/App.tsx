@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import logo from './assets/logo-white.svg'
+import logo from './assets/not clicked.png'
+import clickedLogo from './assets/clicked.png'
 //import WebApp from '@twa-dev/sdk'
 
 function App() {
@@ -35,13 +36,13 @@ function App() {
           onTouchEnd={handleTouchEnd}
           className="button"
           style={{
-            display: 'inlibe-block',
+            display: 'inline-block',
             borderRadius: '50%',
             overflow: 'hidden',
             boxShadow: isClicked ? 'none' : '0 10px 20px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.2)',
           }}
         >
-          <img src={logo} alt="logo" style={{ backgroundColor: 'transparent' }} />
+          <img src={isClicked ? clickedLogo : logo} alt="logo" style={{ backgroundColor: 'transparent' }} />
         </div>
       </button >
     </div >
