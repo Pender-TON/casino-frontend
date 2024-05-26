@@ -13,11 +13,11 @@ function App() {
   const handleMouseUp = () => {
     setIsClicked(false);
   };
-  const handleTouchStart = (e) => {
+  const handleTouchStart = () => {
     e.preventDefault();
     handleMouseDown();
   };
-  const handleTouchEnd = (e) => {
+  const handleTouchEnd = () => {
     e.preventDefault();
     handleMouseUp();
   };
