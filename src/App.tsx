@@ -1,7 +1,9 @@
 import { useState } from "react";
+import WebApp from '@twa-dev/sdk'
 
 function App() {
   const [count, setCount] = useState(0);
+  const userId = WebApp.initDataUnsafe.user?.id;
 
   const handleClick = () => {
     setCount(count + 1);
@@ -13,7 +15,9 @@ function App() {
       <button
         className="h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/coin-default.png')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')]"
         onClick={handleClick}
-      />
+      >
+        {userId}
+      </button>
     </div>
   );
 }
