@@ -1,60 +1,25 @@
+@import "./tailwind.css";
+
 @font-face {
-  font-family: 'Galano Grotesque';
-  src: url(./GalanoGrotesqueHeavy.otf) format('opentype');
+  font-family: "Galano Grotesque";
+  src: url(./assets/GalanoGrotesqueHeavy.otf) format("opentype");
   font-weight: bold;
   font-style: normal;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
+html {
+  @apply font-sans text-base;
 }
 
-.button img {
-  max-width: 80vw;
-  max-height: 80vh;
-  object-fit: contain;
+body,
+#root {
+  height: 100dvh;
+  height: 100vh;
+  width: 100dvw;
+  width: 100vw;
 }
 
-.button:focus {
-  outline: none;
-}
-
-.counter {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Galano Grotesque', sans-serif;
-  font-size: 100px;
-  font-weight: bold;
-  margin-bottom: 25px;
-  color: white;
-  user-select: none;
-}
-
-.button:active {
-  background-color: red;
-}
-
-.button {
-  width: fit-content;
-  height: fit-content;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  appearance: none;
-  outline: none;
-  margin-top: 25px;
-  user-select: none;
+body {
+  --pender-primary: #fd54a6;
+  background-color: var(--pender-primary);
 }
