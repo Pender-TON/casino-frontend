@@ -19,11 +19,14 @@ function App() {
         const mongodb = app.currentUser.mongoClient("mongodb-atlas");
         const collection = mongodb.db("pender-clicks").collection("clicks-01");
 
-        const doc = { userId, userName, count };
-        const result = await collection.insertOne(doc);
-        console.log("Successfully inserted item with _id: ", result.insertedId);
-      };
-    }
+        const existingDoc = await collection.findOne({ userId });
+        if (!existingDoc || count > existingDoc.count) {
+          const doc = { userId, userName, count };
+          const result = await collection.insertOne(doc);
+          console.log("Successfully inserted item with _id: ", result.insertedId);
+        }
+      }
+    };
 
     login();
   }, [count, userName, userId]);
