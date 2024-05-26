@@ -48,6 +48,7 @@
   overflow: visible;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
   appearance: none;
   outline: none;
   margin-top: 25px;
