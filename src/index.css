@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
 
 .button img {
@@ -30,6 +31,7 @@
   font-weight: bold;
   margin-bottom: 25px;
   color: white;
+  user-select: none;
 }
 
 .button {
@@ -46,4 +48,5 @@
   MozAppearance: none;
   outline: none;
   margin-top: 25px;
+  user-select: none;
 }
