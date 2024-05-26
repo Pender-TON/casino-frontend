@@ -47,9 +47,8 @@
   margin: 0;
   overflow: visible;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   appearance: none;
-  WebkitAppearance: none;
-  MozAppearance: none;
   outline: none;
   margin-top: 25px;
   user-select: none;
