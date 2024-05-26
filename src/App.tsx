@@ -11,9 +11,12 @@ function App() {
   const userId = WebApp.initDataUnsafe.user?.id;
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
+  const [, setIsButtonClicked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!userId) return;
+
       const credentials = Credentials.anonymous();
       await app.logIn(credentials);
       if (app.currentUser) {
@@ -29,44 +32,17 @@ function App() {
     };
 
     fetchData();
-  }, []);
+  }, [userId]);
 
-  useEffect(() => {
-    const login = async () => {
-      const credentials = Credentials.anonymous();
-      await app.logIn(credentials);
-      if (app.currentUser) {
-        const mongodb = app.currentUser.mongoClient("mongodb-atlas");
-        const collection = mongodb.db("pender-clicks").collection("clicks-01");
-
-        const existingDoc = await collection.findOne({ userId });
-
-        if (existingDoc) {
-          setCount(existingDoc.count);
-
-          if (count > existingDoc.count) {
-            const result = await collection.updateOne({ userId }, { $set: { count } });
-            console.log("Successfully updated item with _id: ", result.upsertedId);
-            setDisplayCount(count);
-          }
-        } else {
-          const doc = { userId, userName, count };
-          const result = await collection.insertOne(doc);
-          console.log("Successfully inserted item with _id: ", result.insertedId);
-          setDisplayCount(count);
-        }
-      }
-    };
-
-    login();
-  }, [count, userName, userId]);
-
-  const handleClick = () => {
+  const handleClick = async () => {
+    setIsButtonClicked(true);
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
 
     const updateData = async () => {
+      if (!userId || !userName) return;
+
       if (app.currentUser) {
         const mongodb = app.currentUser.mongoClient("mongodb-atlas");
         const collection = mongodb.db("pender-clicks").collection("clicks-01");
@@ -84,11 +60,12 @@ function App() {
       }
     };
 
-    updateData().catch((error) => {
-      // If the database operation fails, revert the count on the screen to its previous value
+    try {
+      await updateData();
+    } catch (error) {
       console.error("Failed to update count in database:", error);
       setDisplayCount(count);
-    });
+    }
   };
 
   return (
