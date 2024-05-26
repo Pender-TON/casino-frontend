@@ -21,14 +21,17 @@ function App() {
 
         const existingDoc = await collection.findOne({ userId });
 
-        if (!existingDoc) {
+        if (existingDoc) {
+          setCount(existingDoc.count);
+
+          if (count > existingDoc.count) {
+            const result = await collection.updateOne({ userId }, { $set: { count } });
+            console.log("Successfully updated item with _id: ", result.upsertedId);
+          }
+        } else {
           const doc = { userId, userName, count };
           const result = await collection.insertOne(doc);
           console.log("Successfully inserted item with _id: ", result.insertedId);
-        }
-        else if (count > existingDoc.count) {
-          const result = await collection.updateOne({ userId }, { $set: { count } });
-          console.log("Successfully updated item with _id: ", result.upsertedId);
         }
       }
     };
