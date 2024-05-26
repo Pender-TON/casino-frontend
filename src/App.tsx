@@ -20,10 +20,15 @@ function App() {
         const collection = mongodb.db("pender-clicks").collection("clicks-01");
 
         const existingDoc = await collection.findOne({ userId });
-        if (!existingDoc || count > existingDoc.count) {
+
+        if (!existingDoc) {
           const doc = { userId, userName, count };
           const result = await collection.insertOne(doc);
           console.log("Successfully inserted item with _id: ", result.insertedId);
+        }
+        else if (count > existingDoc.count) {
+          const result = await collection.updateOne({ userId }, { $set: { count } });
+          console.log("Successfully updated item with _id: ", result.upsertedId);
         }
       }
     };
