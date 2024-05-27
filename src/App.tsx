@@ -42,15 +42,15 @@ function App() {
       const mongodb = app.currentUser.mongoClient("mongodb-atlas");
       const collection = mongodb.db("pender-clicks").collection("clicks-01");
 
-      const existingDoc = await collection.findOne({ userId });
-
-      if (existingDoc) {
-        const result = await collection.updateOne({ userId }, { $set: { count } });
-        console.log("Successfully updated item with _id: ", result.upsertedId);
-      } else {
-        const doc = { userId, userName, count: count };
-        const result = await collection.insertOne(doc);
-        console.log("Successfully inserted item with _id: ", result.insertedId);
+      try {
+        const result = await collection.updateOne(
+          { userId }, // Query to match the document
+          { $set: { count, userName } }, // Update operation
+          { upsert: true } // Upsert option
+        );
+        console.log("Successfully upserted item with _id: ", result.upsertedId || result.modifiedCount);
+      } catch (error) {
+        console.error("Failed to upsert count in database:", error);
       }
     }
   };
