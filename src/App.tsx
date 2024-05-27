@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { App as RealmApp, Credentials } from "realm-web";
 import WebApp from '@twa-dev/sdk'
+import { throttle } from 'lodash'
 
 const REALM_APP_ID = "pender-clicker-ocpnmnl";
 
@@ -11,7 +12,6 @@ function App() {
   const userId = WebApp.initDataUnsafe.user?.id;
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
-  const [, setIsButtonClicked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,34 +35,35 @@ function App() {
     fetchData();
   }, [userId]);
 
+  const updateData = async (count: number) => {
+    if (!userId || !userName) return;
+
+    if (app.currentUser) {
+      const mongodb = app.currentUser.mongoClient("mongodb-atlas");
+      const collection = mongodb.db("pender-clicks").collection("clicks-01");
+
+      const existingDoc = await collection.findOne({ userId });
+
+      if (existingDoc) {
+        const result = await collection.updateOne({ userId }, { $set: { count } });
+        console.log("Successfully updated item with _id: ", result.upsertedId);
+      } else {
+        const doc = { userId, userName, count: count };
+        const result = await collection.insertOne(doc);
+        console.log("Successfully inserted item with _id: ", result.insertedId);
+      }
+    }
+  };
+
+  const trottledUpdateData = useCallback(throttle(updateData, 2000, { trailing: true }), [])
+
   const handleClick = async () => {
-    setIsButtonClicked(true);
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
 
-    const updateData = async () => {
-      if (!userId || !userName) return;
-
-      if (app.currentUser) {
-        const mongodb = app.currentUser.mongoClient("mongodb-atlas");
-        const collection = mongodb.db("pender-clicks").collection("clicks-01");
-
-        const existingDoc = await collection.findOne({ userId });
-
-        if (existingDoc) {
-          const result = await collection.updateOne({ userId }, { $set: { count: newCount } });
-          console.log("Successfully updated item with _id: ", result.upsertedId);
-        } else {
-          const doc = { userId, userName, count: newCount };
-          const result = await collection.insertOne(doc);
-          console.log("Successfully inserted item with _id: ", result.insertedId);
-        }
-      }
-    };
-
     try {
-      await updateData();
+      await trottledUpdateData(newCount);
     } catch (error) {
       console.error("Failed to update count in database:", error);
       setDisplayCount(count);
