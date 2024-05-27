@@ -49,7 +49,7 @@ function App() {
     fetchData();
   }, [userId, collection]);
 
-  const updateData = useCallback(async (newCount: number) => {
+  const updateData = useCallback(async (newCount) => {
     if (!userId || !userName) return;
 
     try {
@@ -77,7 +77,7 @@ function App() {
       await throttledUpdateData(newCount);
     } catch (error) {
       console.error("Failed to update count in database:", error);
-      setDisplayCount(count);
+      // Consider showing a message or indication of failure to the user
     }
   };
 
