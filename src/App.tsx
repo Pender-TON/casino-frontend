@@ -19,7 +19,7 @@ function App() {
   const handleTrophyClick = async () => {
     if (collection) {
       try {
-        const topDocs = await collection.find({}, { sort: { count: -1 }, limit: 3 });
+        const topDocs = await collection.find({}, { sort: { count: -1 }, limit: 5 });
         const message = topDocs.map((doc, index) => `${index + 1}. ${doc.userName}: ${doc.count}`).join('\n');
         alert(message);
       } catch (error) {
@@ -68,7 +68,7 @@ function App() {
     }
   }, [userId, userName, collection]);
 
-  const throttledUpdateData = useMemo(() => throttle(updateData, 4200, { trailing: true }), [updateData]);
+  const throttledUpdateData = useMemo(() => throttle(updateData, 3100, { trailing: true }), [updateData]);
 
   const handleClick = async () => {
     if (!initialDataLoaded) return; // Prevent click action if initial data is not loaded
