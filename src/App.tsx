@@ -11,6 +11,7 @@ function App() {
   const userId = WebApp.initDataUnsafe.user?.id;
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
+  const [initialDataLoaded, setInitialDataLoaded] = useState(false);
 
   const mongodb = useMemo(() => app.currentUser?.mongoClient("mongodb-atlas"), [app.currentUser]);
   const collection = useMemo(() => mongodb?.db("pender-clicks").collection("clicks-01"), [mongodb]);
@@ -39,6 +40,7 @@ function App() {
           if (existingDoc) {
             setCount(existingDoc.count);
             setDisplayCount(existingDoc.count);
+            setInitialDataLoaded(true);
           }
         }
       } catch (error) {
@@ -69,6 +71,8 @@ function App() {
   const throttledUpdateData = useMemo(() => throttle(updateData, 4200, { trailing: true }), [updateData]);
 
   const handleClick = async () => {
+    if (!initialDataLoaded) return; // Prevent click action if initial data is not loaded
+
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
@@ -86,13 +90,15 @@ function App() {
       <button
         className="absolute top-7 right-7 text-4xl active:text-gray-700"
         onClick={handleTrophyClick}
+        disabled={!initialDataLoaded}
       >
         🏆
       </button>
       <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
       <button
-        className="h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/coin-default.png')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')]"
+        className={`h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/coin-default.png')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')] ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
         onClick={handleClick}
+        disabled={!initialDataLoaded}
       />
     </div>
   );
