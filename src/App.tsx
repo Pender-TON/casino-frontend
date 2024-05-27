@@ -55,7 +55,7 @@ function App() {
     }
   };
 
-  const trottledUpdateData = useCallback(throttle(updateData, 2000, { trailing: true }), [])
+  const trottledUpdateData = useCallback(throttle(updateData, 4200, { trailing: true }), [])
 
   const handleClick = async () => {
     const newCount = count + 1;
