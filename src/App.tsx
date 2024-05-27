@@ -84,7 +84,7 @@ function App() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <button
-        className="absolute top-4 right-4 text-4xl"
+        className="absolute top-7 right-7 text-4xl active:text-gray-700"
         onClick={handleTrophyClick}
       >
         🏆
