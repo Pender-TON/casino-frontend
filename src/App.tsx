@@ -49,7 +49,7 @@ function App() {
     fetchData();
   }, [userId, collection]);
 
-  const updateData = useCallback(async (newCount) => {
+  const updateData = useCallback(async (newCount: any) => {
     if (!userId || !userName) return;
 
     try {
