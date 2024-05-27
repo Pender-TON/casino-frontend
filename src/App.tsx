@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { App as RealmApp, Credentials } from "realm-web";
 import WebApp from '@twa-dev/sdk'
 import { throttle } from 'lodash'
@@ -55,14 +55,12 @@ function App() {
     }
   };
 
-  const trottledUpdateData = throttle(updateData, 2000, { trailing: true })
+  const trottledUpdateData = useCallback(throttle(updateData, 2000, { trailing: true }), [])
 
   const handleClick = async () => {
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
-
-
 
     try {
       await trottledUpdateData(newCount);
