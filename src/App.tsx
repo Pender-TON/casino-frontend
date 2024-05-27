@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { App as RealmApp, Credentials } from "realm-web";
-import WebApp from '@twa-dev/sdk'
-import { throttle } from 'lodash'
+import WebApp from '@twa-dev/sdk';
+import { throttle } from 'lodash';
 
 const REALM_APP_ID = "pender-clicker-ocpnmnl";
-
 const app = new RealmApp({ id: REALM_APP_ID });
 
 function App() {
@@ -13,49 +12,61 @@ function App() {
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
 
+  const mongodb = useMemo(() => app.currentUser?.mongoClient("mongodb-atlas"), [app.currentUser]);
+  const collection = useMemo(() => mongodb?.db("pender-clicks").collection("clicks-01"), [mongodb]);
+
+  const handleTrophyClick = async () => {
+    if (collection) {
+      try {
+        const topDocs = await collection.find({}, { sort: { count: -1 }, limit: 3 });
+        const message = topDocs.map((doc, index) => `${index + 1}. ${doc.userName}: ${doc.count}`).join('\n');
+        alert(message);
+      } catch (error) {
+        console.error("Failed to fetch top documents:", error);
+      }
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!userId) return;
 
       const credentials = Credentials.anonymous();
-      await app.logIn(credentials);
-      if (app.currentUser) {
-        const mongodb = app.currentUser.mongoClient("mongodb-atlas");
-        const collection = mongodb.db("pender-clicks").collection("clicks-01");
-
-        const existingDoc = await collection.findOne({ userId });
-
-        if (existingDoc) {
-          setCount(existingDoc.count);
-          setDisplayCount(existingDoc.count);
+      try {
+        await app.logIn(credentials);
+        if (collection) {
+          const existingDoc = await collection.findOne({ userId });
+          if (existingDoc) {
+            setCount(existingDoc.count);
+            setDisplayCount(existingDoc.count);
+          }
         }
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
       }
     };
 
     fetchData();
-  }, [userId]);
+  }, [userId, collection]);
 
-  const updateData = async (count: number) => {
+  const updateData = useCallback(async (newCount: number) => {
     if (!userId || !userName) return;
 
-    if (app.currentUser) {
-      const mongodb = app.currentUser.mongoClient("mongodb-atlas");
-      const collection = mongodb.db("pender-clicks").collection("clicks-01");
-
-      try {
+    try {
+      if (collection) {
         const result = await collection.updateOne(
-          { userId }, // Query to match the document
-          { $set: { count, userName } }, // Update operation
-          { upsert: true } // Upsert option
+          { userId },
+          { $set: { count: newCount, userName } },
+          { upsert: true }
         );
-        console.log("Successfully upserted item with _id: ", result.upsertedId || result.modifiedCount);
-      } catch (error) {
-        console.error("Failed to upsert count in database:", error);
+        console.log("Successfully upserted item with _id:", result.upsertedId || result.modifiedCount);
       }
+    } catch (error) {
+      console.error("Failed to upsert count in database:", error);
     }
-  };
+  }, [userId, userName, collection]);
 
-  const trottledUpdateData = useCallback(throttle(updateData, 4200, { trailing: true }), [])
+  const throttledUpdateData = useMemo(() => throttle(updateData, 4200, { trailing: true }), [updateData]);
 
   const handleClick = async () => {
     const newCount = count + 1;
@@ -63,16 +74,22 @@ function App() {
     setDisplayCount(newCount);
 
     try {
-      await trottledUpdateData(newCount);
+      await throttledUpdateData(newCount);
     } catch (error) {
       console.error("Failed to update count in database:", error);
-      setDisplayCount(count);
+      setDisplayCount(count); // Reset to the previous count on failure
     }
   };
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <span className="text-8xl tabular-nums text-white">{displayCount}</span>
+      <button
+        className="absolute top-4 right-4 text-4xl"
+        onClick={handleTrophyClick}
+      >
+        🏆
+      </button>
+      <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
       <button
         className="h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/coin-default.png')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')]"
         onClick={handleClick}
