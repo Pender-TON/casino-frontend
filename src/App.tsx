@@ -77,25 +77,24 @@ function App() {
       await throttledUpdateData(newCount);
     } catch (error) {
       console.error("Failed to update count in database:", error);
-      setDisplayCount(count); // Reset to the previous count on failure
-    }
-  };
+      setDisplayCount(count);
+    };
 
-  return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
-      <button
-        className="absolute top-7 right-7 text-4xl active:text-gray-700"
-        onClick={handleTrophyClick}
-      >
-        🏆
-      </button>
-      <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
-      <button
-        className="h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/coin-default.png')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')]"
-        onClick={handleClick}
-      />
-    </div>
-  );
-}
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center">
+        <button
+          className="absolute top-7 right-7 text-4xl active:text-gray-700"
+          onClick={handleTrophyClick}
+        >
+          🏆
+        </button>
+        <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
+        <button
+          className="h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/coin-default.png')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')]"
+          onClick={handleClick}
+        />
+      </div>
+    );
+  }
 
-export default App;
+  export default App;
