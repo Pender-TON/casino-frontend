@@ -32,16 +32,21 @@ function App() {
     const fetchData = async () => {
       if (!userId) return;
 
-      const credentials = Credentials.anonymous();
       try {
+        const credentials = Credentials.anonymous();
         await app.logIn(credentials);
         if (collection) {
           const existingDoc = await collection.findOne({ userId });
           if (existingDoc) {
             setCount(existingDoc.count);
             setDisplayCount(existingDoc.count);
-            setInitialDataLoaded(true);
+          } else {
+            const newDoc = { userId, userName, count: 0 };
+            await collection.insertOne(newDoc);
+            setCount(newDoc.count);
+            setDisplayCount(newDoc.count);
           }
+          setInitialDataLoaded(true);
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
