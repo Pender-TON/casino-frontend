@@ -1,5 +1,6 @@
 import React from 'react';
 import SmallChip from './assets/small-chip.svg';
+import Diamond from './assets/diamond.svg';
 interface TableTopDataProps {
     displayCount: number;
     displayGems: number;
@@ -17,6 +18,7 @@ const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, 
                         <img src={SmallChip} alt="Chip" className="w-6 h-6" />
                         <span className="text-3xl tabular-nums text-white select-none">{displayCount.toLocaleString()}</span>
                     </div>
+                    <img src={Diamond} alt="Diamond" className="w-6 h-6" />
                     <span className="text-3xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
                 </div>
             </div>
