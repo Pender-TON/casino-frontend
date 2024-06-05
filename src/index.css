@@ -20,6 +20,30 @@ body,
 }
 
 body {
-  --pender-primary: #fd54a6;
-  background-color: var(--pender-primary);
+  @apply bg-gradient z--10;
+  background-image: url('./assets/green-texture.svg'), linear-gradient(to right, #0F642D 0%, #138740 15%, #138740 85%, #0F642D 100%);
+  background-blend-mode: multiply;
+}
+#table-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background: url('./assets/table-top-texture.svg'), url('./assets/tableTop.svg');
+  background-size: cover;
+  z-index: 1;
+  background-blend-mode: color-burn;
+}
+#table-bottom {
+  position: absolute;
+  top: 50vh;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 56.5vh);
+  background: url('./assets/table-bottom-texture.svg'), url('./assets/tableBottom.svg');
+  background-size: cover;
+  background-position: center bottom;
+  z-index: 2;
+  background-blend-mode: color-burn;
 }
