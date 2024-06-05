@@ -84,8 +84,13 @@ function App() {
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
+    WebApp.HapticFeedback.impactOccurred('medium');
     const newRotation = (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 4 + 5);
     setRotation(newRotation);
+
+    setTimeout(() => {
+      setRotation(0);
+    }, 500);
 
     try {
       await throttledUpdateData(newCount);
