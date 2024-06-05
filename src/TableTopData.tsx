@@ -23,8 +23,9 @@ const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, 
                         <span className="text-3xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
                     </div>
                 </div>
-                <span className="text-4xl tabular-nums text-white select-none">{`${leaderboardPosition}`}</span>
             </div>
-            );
+            <span className="text-4xl tabular-nums text-white select-none">{`${leaderboardPosition}`}</span>
+        </div>
+    );
 };
-            export default TableTopData;
+export default TableTopData;
