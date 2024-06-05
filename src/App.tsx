@@ -124,7 +124,7 @@ function App() {
           displayCount={displayCount}
           displayGems={displayGems}
           leaderboardPosition={leaderboardPosition}
-          imageSrc="./assets/pender-head.svg"
+          imageSrc="/src/assets/pender-head.svg"
         />
       </div>
       <div id="table-top" className="relative">
