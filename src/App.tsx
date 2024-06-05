@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { App as RealmApp, Credentials } from "realm-web";
 import WebApp from '@twa-dev/sdk';
-import { set, throttle } from 'lodash';
+import { throttle } from 'lodash';
 import TableTopData from './TableTopData';
 
 const REALM_APP_ID = "pender-clicker-ocpnmnl";
