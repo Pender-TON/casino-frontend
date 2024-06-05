@@ -114,7 +114,7 @@ function App() {
       </div>
       <div id="table-bottom" />
       <button
-        style={{ transform: `rotate(${rotation}deg) scale(0.5)` }}
+        style={{ transform: `rotate(${rotation}deg) scale(0.4)` }}
         className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
         onClick={handleClick}
         disabled={!initialDataLoaded}
