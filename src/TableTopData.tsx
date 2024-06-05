@@ -1,6 +1,6 @@
 import React from 'react';
 import SmallChip from './assets/small-chip.svg';
-import Diamond from './assets/gem.svg';
+import Diamond from './assets/diamond.svg';
 interface TableTopDataProps {
     displayCount: number;
     displayGems: number;
