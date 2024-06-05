@@ -129,7 +129,6 @@ function App() {
         />
       </div>
       <div id="table-top" className="relative">
-        <span className="text-4xl tabular-nums text-white select-none absolute top-[32px] left-1/2 transform -translate-x-1/2 -translate-y-1/2">{displayCount.toLocaleString()}</span>
       </div>
       <div id="table-bottom" />
       <button
