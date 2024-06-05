@@ -84,7 +84,7 @@ function App() {
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
-    const newRotation = Math.random() * 10 - 5;
+    const newRotation = Math.random() * 4 + 5;
     setRotation(newRotation);
 
     try {
@@ -109,7 +109,7 @@ function App() {
       <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
       <button
         style={{ transform: `rotate(${rotation}deg)` }} // Add inline style here
-        className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none active:scale-90 z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
+        className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none active:scale-90 transition-transform z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
         onClick={handleClick}
         disabled={!initialDataLoaded}
       />
