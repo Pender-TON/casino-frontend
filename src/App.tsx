@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { App as RealmApp, Credentials } from "realm-web";
 import WebApp from '@twa-dev/sdk';
-import { throttle } from 'lodash';
+import { set, throttle } from 'lodash';
+import TableTopData from './TableTopData';
 
 const REALM_APP_ID = "pender-clicker-ocpnmnl";
 const app = new RealmApp({ id: REALM_APP_ID });
@@ -11,6 +12,8 @@ function App() {
   const userId = WebApp.initDataUnsafe.user?.id;
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
+  const [leaderboardPosition, setLeaderboardPosition] = useState<number | null>(null);
+  const displayGems = 0;
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   WebApp.expand();
 
@@ -38,6 +41,13 @@ function App() {
         await app.logIn(credentials);
         if (collection) {
           const existingDoc = await collection.findOne({ userId });
+          try {
+            const topDocs = await collection.find({}, { sort: { count: -1 } });
+            const position = topDocs.findIndex(doc => doc.userId === userId) + 1;
+            setLeaderboardPosition(position);
+          } catch (error) {
+            console.error("Failed to fetch top documents:", error);
+          }
           if (existingDoc) {
             setCount(existingDoc.count);
             setDisplayCount(existingDoc.count);
@@ -109,6 +119,14 @@ function App() {
       >
         🏆
       </button>
+      <div id="table-top" className="relative">
+        <TableTopData
+          displayCount={displayCount}
+          displayGems={displayGems}
+          leaderboardPosition={leaderboardPosition}
+          imageSrc="./assets/pender-head.svg" // replace with your actual image path
+        />
+      </div>
       <div id="table-top" className="relative">
         <span className="text-4xl tabular-nums text-white select-none absolute top-[32px] left-1/2 transform -translate-x-1/2 -translate-y-1/2">{displayCount.toLocaleString()}</span>
       </div>
