@@ -4,6 +4,7 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+
       zIndex: {
         '-10': '-10',
       },
@@ -19,6 +20,11 @@ export default {
         'gradient': 'linear-gradient(to right, #0F642D 0%, #138740 15%, #138740 85%, #0F642D 100%)',
         'texture': 'url("/src/assets/green-texture.svg")',
       },
+      variants: {
+        extend: {
+          scale: ['active'],
+        },
+      }
     },
   },
   plugins: [function ({ addUtilities }) {
