@@ -33,7 +33,7 @@ body {
   background: url('./assets/table-top-texture.svg'), url('./assets/tableTop.svg');
   background-size: cover;
   z-index: 1;
-  background-blend-mode: color-burn;
+  background-blend-mode: multiply;
 }
 #table-bottom {
   position: absolute;
@@ -45,7 +45,7 @@ body {
   background-size: cover;
   background-position: center bottom;
   z-index: 2;
-  background-blend-mode: color-burn;
+  background-blend-mode: multiply;
 }
 button {
   -webkit-touch-callout: none;
