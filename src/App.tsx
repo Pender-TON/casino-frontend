@@ -75,12 +75,16 @@ function App() {
 
   const throttledUpdateData = useMemo(() => throttle(updateData, 3100, { trailing: true }), [updateData]);
 
+  const [rotation, setRotation] = useState(0);
+
   const handleClick = async () => {
     if (!initialDataLoaded) return; // Prevent click action if initial data is not loaded
 
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
+    const newRotation = Math.random() * 10 - 5;
+    setRotation(newRotation);
 
     try {
       await throttledUpdateData(newCount);
