@@ -12,6 +12,7 @@ function App() {
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+  WebApp.isExpanded = true;
 
   const mongodb = useMemo(() => app.currentUser?.mongoClient("mongodb-atlas"), [app.currentUser]);
   const collection = useMemo(() => mongodb?.db("pender-clicks").collection("clicks-01"), [mongodb]);
@@ -107,7 +108,8 @@ function App() {
       <div id="table-bottom" />
       <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
       <button
-        className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none active: scale-90 transform rotate-${rotation} z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
+        style={{ transform: `rotate(${rotation}deg)` }} // Add inline style here
+        className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none active:scale-90 z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
         onClick={handleClick}
         disabled={!initialDataLoaded}
       />
