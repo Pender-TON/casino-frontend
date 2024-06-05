@@ -103,7 +103,7 @@ function App() {
       <div id="table-bottom" />
       <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
       <button
-        className={`h-96 w-96 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none active:bg-[url('./assets/coin-clicked.png')] z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
+        className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none active: scale-90 z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
         onClick={handleClick}
         disabled={!initialDataLoaded}
       />
