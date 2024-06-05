@@ -7,6 +7,7 @@ import imageSrc from "./assets/pender-head.svg";
 
 const REALM_APP_ID = "pender-clicker-ocpnmnl";
 const app = new RealmApp({ id: REALM_APP_ID });
+
 function App() {
   const [count, setCount] = useState(0);
   const userId = WebApp.initDataUnsafe.user?.id;
@@ -47,6 +48,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       if (!userId) return;
+
       try {
         const credentials = Credentials.anonymous();
         await app.logIn(credentials);
@@ -109,7 +111,7 @@ function App() {
   const [rotation, setRotation] = useState(0);
 
   const handleClick = async () => {
-    if (!initialDataLoaded) return; // Prevent click action if initial data is not loaded
+    if (!initialDataLoaded) return;
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
@@ -150,7 +152,7 @@ function App() {
       <div id="table-bottom" />
       <button
         style={{ transform: `rotate(${rotation}deg)` }}
-        className={`z-1 h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform ${!initialDataLoaded ? "cursor-not-allowed opacity-50" : ""}`}
+        className={`z-50 h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform ${!initialDataLoaded ? "cursor-not-allowed opacity-50" : ""}`}
         onClick={handleClick}
         disabled={!initialDataLoaded}
       />
