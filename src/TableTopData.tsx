@@ -18,12 +18,13 @@ const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, 
                         <img src={SmallChip} alt="Chip" className="w-6 h-6" />
                         <span className="text-3xl tabular-nums text-white select-none">{displayCount.toLocaleString()}</span>
                     </div>
-                    <img src={Diamond} alt="Diamond" className="w-6 h-6" />
-                    <span className="text-3xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
+                    <div className="flex items-center gap-x-2">
+                        <img src={Diamond} alt="Diamond" className="w-6 h-6" />
+                        <span className="text-3xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
+                    </div>
                 </div>
+                <span className="text-4xl tabular-nums text-white select-none">{`${leaderboardPosition}`}</span>
             </div>
-            <span className="text-4xl tabular-nums text-white select-none">{`${leaderboardPosition}`}</span>
-        </div>
-    );
+            );
 };
-export default TableTopData;
+            export default TableTopData;
