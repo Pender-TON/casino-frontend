@@ -10,7 +10,7 @@ const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, 
     return (
         <div className="flex flex-row justify-center items-center gap-x-4" >
             <img src={imageSrc} alt="Tabletop" className="w-16 h-16" />
-            <div className="flex flex-col items-center justify-center space-y-2">
+            <div className="flex flex-col items-center justify-center space-y-0">
                 <span className="text-4xl tabular-nums text-white select-none">{displayCount.toLocaleString()}</span>
                 <span className="text-4xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
             </div>
