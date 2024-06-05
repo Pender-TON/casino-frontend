@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { App as RealmApp, Credentials } from "realm-web";
-import WebApp from '@twa-dev/sdk';
-import { throttle } from 'lodash';
-import TableTopData from './TableTopData';
-import imageSrc from './assets/pender-head.svg';
+import WebApp from "@twa-dev/sdk";
+import { throttle } from "lodash";
+import TableTopData from "./TableTopData";
+import imageSrc from "./assets/pender-head.svg";
 
 const REALM_APP_ID = "pender-clicker-ocpnmnl";
 const app = new RealmApp({ id: REALM_APP_ID });
@@ -13,19 +13,32 @@ function App() {
   const userId = WebApp.initDataUnsafe.user?.id;
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
-  const [leaderboardPosition, setLeaderboardPosition] = useState<number | null>(null);
+  const [leaderboardPosition, setLeaderboardPosition] = useState<number | null>(
+    null,
+  );
   const displayGems = 0;
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   WebApp.expand();
 
-  const mongodb = useMemo(() => app.currentUser?.mongoClient("mongodb-atlas"), [app.currentUser]);
-  const collection = useMemo(() => mongodb?.db("pender-clicks").collection("clicks-01"), [mongodb]);
+  const mongodb = useMemo(
+    () => app.currentUser?.mongoClient("mongodb-atlas"),
+    [app.currentUser],
+  );
+  const collection = useMemo(
+    () => mongodb?.db("pender-clicks").collection("clicks-01"),
+    [mongodb],
+  );
 
   const handleTrophyClick = async () => {
     if (collection) {
       try {
-        const topDocs = await collection.find({}, { sort: { count: -1 }, limit: 5 });
-        const message = topDocs.map((doc, index) => `${index + 1}. ${doc.userName}: ${doc.count}`).join('\n');
+        const topDocs = await collection.find(
+          {},
+          { sort: { count: -1 }, limit: 5 },
+        );
+        const message = topDocs
+          .map((doc, index) => `${index + 1}. ${doc.userName}: ${doc.count}`)
+          .join("\n");
         alert(message);
       } catch (error) {
         console.error("Failed to fetch top documents:", error);
@@ -120,6 +133,9 @@ function App() {
       >
         🏆
       </button>
+
+      <div id="table-top" className="relative">
+      </div>
       <div id="table-top" className="relative">
         <TableTopData
           displayCount={displayCount}
@@ -128,16 +144,14 @@ function App() {
           imageSrc={imageSrc}
         />
       </div>
-      <div id="table-top" className="relative">
-      </div>
       <div id="table-bottom" />
       <button
         style={{ transform: `rotate(${rotation}deg)` }}
-        className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
+        className={`z-1 h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform ${!initialDataLoaded ? "cursor-not-allowed opacity-50" : ""}`}
         onClick={handleClick}
         disabled={!initialDataLoaded}
       />
-    </div>
+    </div >
   );
 }
 
