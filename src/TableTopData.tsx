@@ -1,6 +1,7 @@
 import React from 'react';
 import SmallChip from './assets/small-chip.svg';
 import Diamond from './assets/diamond.png';
+
 interface TableTopDataProps {
     displayCount: number;
     displayGems: number;
@@ -14,11 +15,11 @@ const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, 
             <div className="flex flex-row items-center gap-x-4">
                 <img src={imageSrc} alt="Tabletop" className="w-19 h-19" />
                 <div className="flex flex-col justify-center space-y-2">
-                    <div className="flex items-start gap-x-2">
+                    <div className="flex items-center gap-x-2">
                         <img src={SmallChip} alt="Chip" className="w-6 h-6" />
                         <span className="text-3xl tabular-nums text-white select-none">{displayCount.toLocaleString()}</span>
                     </div>
-                    <div className="flex items-start gap-x-2">
+                    <div className="flex items-center gap-x-2">
                         <img src={Diamond} alt="Diamond" className="w-6 h-6" />
                         <span className="text-3xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
                     </div>
@@ -28,4 +29,5 @@ const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, 
         </div>
     );
 };
+
 export default TableTopData;
