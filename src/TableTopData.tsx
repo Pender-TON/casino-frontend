@@ -9,7 +9,7 @@ interface TableTopDataProps {
 
 const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, leaderboardPosition, imageSrc }) => {
     return (
-        <div className="flex flex-row justify-between items-center gap-x-4 mt-4 mx-4 px-7 w-full" >
+        <div className="flex flex-row justify-between items-center gap-x-4 mt-4 mx-4 px-11 w-full" >
             <div className="flex flex-row items-center gap-x-4">
                 <img src={imageSrc} alt="Tabletop" className="w-19 h-19" />
                 <div className="flex flex-col items-center justify-center space-y-0">
