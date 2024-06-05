@@ -84,7 +84,7 @@ function App() {
     const newCount = count + 1;
     setCount(newCount);
     setDisplayCount(newCount);
-    const newRotation = Math.random() * 4 + 5;
+    const newRotation = (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 4 + 5);
     setRotation(newRotation);
 
     try {
