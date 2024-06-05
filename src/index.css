@@ -11,6 +11,10 @@ html {
   @apply font-sans text-base;
 }
 
+body, html {
+  overflow-x: hidden;
+}
+
 body,
 #root {
   height: 100dvh;
