@@ -47,3 +47,6 @@ body {
   z-index: 2;
   background-blend-mode: color-burn;
 }
+button {
+  -webkit-touch-callout: none;
+}

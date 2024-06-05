@@ -109,11 +109,12 @@ function App() {
       >
         🏆
       </button>
-      <div id="table-top" />
+      <div id="table-top" className="relative">
+        <span className="text-8xl tabular-nums text-white select-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">{displayCount}</span>
+      </div>
       <div id="table-bottom" />
-      <span className="text-8xl tabular-nums text-white select-none">{displayCount}</span>
       <button
-        style={{ transform: `rotate(${rotation}deg)` }} // Add inline style here
+        style={{ transform: `rotate(${rotation}deg)` }}
         className={`h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none active:scale-90 transition-transform z-10 ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
         onClick={handleClick}
         disabled={!initialDataLoaded}
