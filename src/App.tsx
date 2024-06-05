@@ -12,7 +12,7 @@ function App() {
   const userName = WebApp.initDataUnsafe.user?.username;
   const [displayCount, setDisplayCount] = useState(0);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
-  WebApp.isExpanded = true;
+  WebApp.expand();
 
   const mongodb = useMemo(() => app.currentUser?.mongoClient("mongodb-atlas"), [app.currentUser]);
   const collection = useMemo(() => mongodb?.db("pender-clicks").collection("clicks-01"), [mongodb]);
