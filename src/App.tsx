@@ -3,6 +3,7 @@ import { App as RealmApp, Credentials } from "realm-web";
 import WebApp from '@twa-dev/sdk';
 import { throttle } from 'lodash';
 import TableTopData from './TableTopData';
+import imageSrc from './assets/pender-head.svg';
 
 const REALM_APP_ID = "pender-clicker-ocpnmnl";
 const app = new RealmApp({ id: REALM_APP_ID });
@@ -124,7 +125,7 @@ function App() {
           displayCount={displayCount}
           displayGems={displayGems}
           leaderboardPosition={leaderboardPosition}
-          imageSrc="/src/assets/pender-head.svg"
+          imageSrc={imageSrc}
         />
       </div>
       <div id="table-top" className="relative">
