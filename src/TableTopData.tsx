@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as SmallChip } from './assets/small-chip.svg';
+import SmallChip from './assets/small-chip.svg';
 interface TableTopDataProps {
     displayCount: number;
     displayGems: number;
@@ -14,7 +14,7 @@ const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, 
                 <img src={imageSrc} alt="Tabletop" className="w-19 h-19" />
                 <div className="flex flex-col items-center justify-center space-y-0">
                     <div className="flex items-center gap-x-2">
-                        <SmallChip />
+                        <img src={SmallChip} alt="Chip" className="w-6 h-6" />
                         <span className="text-3xl tabular-nums text-white select-none">{displayCount.toLocaleString()}</span>
                     </div>
                     <span className="text-3xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
