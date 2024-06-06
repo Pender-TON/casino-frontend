@@ -3,31 +3,40 @@ import SmallChip from './assets/small-chip.svg';
 import Diamond from './assets/diamond.png';
 
 interface TableTopDataProps {
-    displayCount: number;
-    displayGems: number;
-    leaderboardPosition: number | null;
-    imageSrc: string;
+  displayCount: number;
+  displayGems: number;
+  leaderboardPosition: number | null;
+  imageSrc: string;
 }
 
-const TableTopData: React.FC<TableTopDataProps> = ({ displayCount, displayGems, leaderboardPosition, imageSrc }) => {
-    return (
-        <div className="flex flex-row justify-between items-center gap-x-4 mt-4 mx-4 px-8 w-full" >
-            <div className="flex flex-row items-center gap-x-4">
-                <img src={imageSrc} alt="Tabletop" className="w-16 h-16" />
-                <div className="flex flex-col justify-center space-y-0">
-                    <div className="flex items-center gap-x-2">
-                        <img src={SmallChip} alt="Chip" className="w-6 h-6" />
-                        <span className="text-3xl tabular-nums text-white select-none">{displayCount.toLocaleString()}</span>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                        <img src={Diamond} alt="Diamond" className="w-6 h-6" />
-                        <span className="text-3xl tabular-nums text-white select-none">{displayGems.toLocaleString()}</span>
-                    </div>
-                </div>
-            </div>
-            <span className="text-4xl tabular-nums text-white select-none">{`${leaderboardPosition}`}</span>
+const TableTopData: React.FC<TableTopDataProps> = ({
+  displayCount,
+  displayGems,
+  leaderboardPosition,
+  imageSrc,
+}) => {
+  return (
+    <div className="mx-4 mt-4 flex w-full flex-row items-center justify-between gap-x-4 px-8">
+      <div className="flex flex-row items-center gap-x-4">
+        <img src={imageSrc} alt="Tabletop" className="h-16 w-16" />
+        <div className="flex flex-col justify-center space-y-0">
+          <div className="flex items-center gap-x-2">
+            <img src={SmallChip} alt="Chip" className="h-6 w-6" />
+            <span className="select-none text-3xl tabular-nums text-white">
+              {displayCount.toLocaleString()}
+            </span>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <img src={Diamond} alt="Diamond" className="h-6 w-6" />
+            <span className="select-none text-3xl tabular-nums text-white">
+              {displayGems.toLocaleString()}
+            </span>
+          </div>
         </div>
-    );
+      </div>
+      <span className="select-none text-4xl tabular-nums text-white">{`${leaderboardPosition}`}</span>
+    </div>
+  );
 };
 
 export default TableTopData;
