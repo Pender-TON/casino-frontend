@@ -131,7 +131,7 @@ function App() {
     }
   };
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <button
         className="absolute right-7 top-7 text-4xl active:text-gray-700"
         onClick={handleTrophyClick}
