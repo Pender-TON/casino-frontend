@@ -11,24 +11,20 @@ html {
   @apply font-sans text-base;
 }
 
-body, html {
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
-
 body,
 #root {
   height: 100dvh;
   height: 100vh;
-  width: 100dvw;
-  width: 100vw;
+  width: 100%;
+  width: 100%;
 }
 
 body {
   @apply bg-gradient z--10;
   background-image: url('./assets/green-texture.svg'), linear-gradient(to right, #0F642D 0%, #138740 15%, #138740 85%, #0F642D 100%);
   background-blend-mode: multiply;
+  margin: 0;
+  padding: 0;
 }
 #table-top {
   position: absolute;
@@ -37,22 +33,24 @@ body {
   width: 100%;
   height: 50vh;
   background: url('./assets/table-top-texture.svg'), url('./assets/tableTop.svg');
-  background-size: cover;
+  background-size: contain;
   z-index: 1;
   background-blend-mode: multiply;
+  background-repeat: no-repeat;
 
 }
 #table-bottom {
   position: absolute;
-  top: 50vh;
+  bottom: 10vh;
   left: 0;
   width: 100%;
-  height: calc(100vh - 56.5vh);
+  height: 50vh;
   background: url('./assets/table-bottom-texture.svg'), url('./assets/tableBottom.svg');
-  background-size: cover;
+  background-size: contain;
   background-position: center bottom;
   z-index: 2;
   background-blend-mode: multiply;
+  background-repeat: no-repeat
 }
 button {
   -webkit-touch-callout: none;
