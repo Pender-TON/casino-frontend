@@ -140,42 +140,43 @@ function App() {
     }
   };
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center">
-      <button
-        className="absolute right-7 top-7 text-4xl active:text-gray-700"
-        onClick={handleTrophyClick}
-        disabled={!initialDataLoaded}
-      >
-        🏆
-      </button>
-
-      <div id="table-top" className="relative"></div>
-      <div id="table-top" className="relative">
+    <div className="relative flex h-full w-full flex-col items-center">
+      <div className="flex h-[13%] w-full justify-between px-8 py-4">
         <TableTopData
           displayCount={displayCount}
           displayGems={displayGems}
           leaderboardPosition={leaderboardPosition}
           imageSrc={imageSrc}
         />
+
+        <button
+          className="text-4xl active:text-gray-700"
+          onClick={handleTrophyClick}
+          disabled={!initialDataLoaded}
+        >
+          🏆
+        </button>
       </div>
-      <div id="table-bottom" />
-      <button
-        style={{ transform: `rotate(${rotation}deg)` }}
-        className={`z-50 h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
-        onTouchStart={handleClick}
-        disabled={!initialDataLoaded}
-      />
-      {clickPositions.map((pos, index) => (
-        <ClickAnimation
-          key={index}
-          x={pos.x}
-          y={pos.y}
-          onEnd={() =>
-            setClickPositions(clickPositions.filter((_, i) => i !== index))
-          }
-          style={{ zIndex: 1000, color: 'red' }}
+
+      <div className='w-full h-full flex items-center justify-center'>
+        <button
+          style={{ transform: `rotate(${rotation}deg)` }}
+          className={`z-50 h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
+          onTouchStart={handleClick}
+          disabled={!initialDataLoaded}
         />
-      ))}
+        {clickPositions.map((pos, index) => (
+          <ClickAnimation
+            key={index}
+            x={pos.x}
+            y={pos.y}
+            onEnd={() =>
+              setClickPositions(clickPositions.filter((_, i) => i !== index))
+            }
+            style={{ zIndex: 1000, color: 'red' }}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -15,12 +15,15 @@ body,
 #root {
   height: 100dvh;
   height: 100vh;
-  width: 100%;
-  width: 100%;
+  width: 100dvw;
+  width: 100vw;
+}
+
+html {
+  background-color: #0f642d;
 }
 
 body {
-  @apply z--10 bg-gradient;
   background-image: url('./assets/green-texture.svg'),
     linear-gradient(
       to right,
@@ -33,33 +36,7 @@ body {
   margin: 0;
   padding: 0;
 }
-#table-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50vh;
-  background: url('./assets/table-top-texture.svg'),
-    url('./assets/tableTop.svg');
-  background-size: contain;
-  z-index: 1;
-  background-blend-mode: multiply;
-  background-repeat: no-repeat;
-}
-#table-bottom {
-  position: absolute;
-  bottom: 10vh;
-  left: 0;
-  width: 100%;
-  height: 50vh;
-  background: url('./assets/table-bottom-texture.svg'),
-    url('./assets/tableBottom.svg');
-  background-size: contain;
-  background-position: center bottom;
-  z-index: 2;
-  background-blend-mode: multiply;
-  background-repeat: no-repeat;
-}
+
 button {
   -webkit-touch-callout: none;
 }

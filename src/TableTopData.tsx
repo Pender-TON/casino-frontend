@@ -16,7 +16,7 @@ const TableTopData: React.FC<TableTopDataProps> = ({
   imageSrc,
 }) => {
   return (
-    <div className="mx-4 mt-4 flex w-full flex-row items-center justify-between gap-x-4 px-8">
+    <div className="flex items-center justify-between gap-x-4">
       <div className="flex flex-row items-center gap-x-4">
         <img src={imageSrc} alt="Tabletop" className="h-16 w-16" />
         <div className="flex flex-col justify-center space-y-0">
