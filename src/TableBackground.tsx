@@ -6,7 +6,7 @@ export const TableBackground = (props: { children: ReactNode }) => {
   const { children } = props;
   return (
     <div className="relative h-full w-full">
-      <div className="absolute h-full w-full pb-10">
+      <div className="absolute h-full w-full pb-6">
         <img className="h-1/2 w-full" src={tableTop} />
         <img className="h-1/2 w-full" src={tableBottom} />
       </div>
