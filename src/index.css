@@ -23,7 +23,7 @@ html {
   background-color: #0f642d;
 }
 
-body {
+.bg-green-top {
   background-image: url('./assets/green-texture.svg'),
     linear-gradient(
       to right,
@@ -33,13 +33,28 @@ body {
       #0f642d 100%
     );
   background-blend-mode: multiply;
-  margin: 0;
-  padding: 0;
 }
 
-button {
-  -webkit-touch-callout: none;
+.table-top-left-corner::before {
+  content: '';
+  position: absolute;
+
+  top: 0px;
+  left: 20px;
+  height: 40px;
+  width: 100px;
+  border-top-left-radius: 40px;
+  box-shadow: -60px 0 0 0 #3d2823;
 }
-button:active {
-  transform: scale(0.4);
+
+.table-top-right-corner::before {
+  content: '';
+  position: absolute;
+
+  top: 0px;
+  right: 20px;
+  height: 40px;
+  width: 100px;
+  border-top-right-radius: 40px;
+  box-shadow: 60px 0 0 0 #3d2823;
 }
