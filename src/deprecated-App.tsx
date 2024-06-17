@@ -1,8 +1,9 @@
+//TODO: remove file
+
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { App as RealmApp, Credentials } from 'realm-web';
 import WebApp from '@twa-dev/sdk';
 import { throttle } from 'lodash';
-import TableTopData from './TableTopData';
 import imageSrc from './assets/pender-head.svg';
 import ClickAnimation from './ClickDisplay';
 
@@ -123,7 +124,7 @@ function App() {
     WebApp.HapticFeedback.impactOccurred('medium');
     setClickPositions([
       ...clickPositions,
-      { x: event.touches[0].clientX, y: event.touches[0].clientY },
+      { x: event.touches[0]!.clientX, y: event.touches[0]!.clientY },
     ]);
     const newRotation =
       (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 4 + 5);
@@ -142,12 +143,12 @@ function App() {
   return (
     <div className="relative flex h-full w-full flex-col items-center">
       <div className="flex h-[13%] w-full justify-between px-8 py-4">
-        <TableTopData
+        {/* <TableTopData
           displayCount={displayCount}
           displayGems={displayGems}
           leaderboardPosition={leaderboardPosition}
           imageSrc={imageSrc}
-        />
+        /> */}
 
         <button
           className="text-4xl active:text-gray-700"
@@ -158,7 +159,7 @@ function App() {
         </button>
       </div>
 
-      <div className='w-full h-full flex items-center justify-center'>
+      <div className="flex h-full w-full items-center justify-center">
         <button
           style={{ transform: `rotate(${rotation}deg)` }}
           className={`z-50 h-56 w-56 cursor-pointer select-none overflow-hidden rounded-full border-none bg-[url('./assets/chip-default.svg')] bg-cover outline-none transition-transform ${!initialDataLoaded ? 'cursor-not-allowed opacity-50' : ''}`}
