@@ -13,11 +13,12 @@ export default defineConfig(({ command, mode }) => {
       port: 4343,
       proxy: {
         '/api': {
-          target: 'http://18.168.48.43:8080',
+          target: 'https://visto.team',
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, ''),
         },
       },
+      changeOrigin: true,
       https: isDev
         ? {
             key: fs.readFileSync('./server.key'),
