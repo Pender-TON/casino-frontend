@@ -1,0 +1,1 @@
+export { useLeaderboardMutation } from './model'

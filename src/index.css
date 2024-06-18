@@ -1,0 +1,56 @@
+@import './tailwind.css';
+@import './fonts/fonts.css';
+
+html {
+  @apply font-sans text-base;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
+}
+
+#root {
+  --table-desk-bg: #3d2823;
+  --table-desk-accent: #713e2b;
+  --table-top-line: #d0e6d8;
+}
+
+.bg-green-top {
+  background-image: url('./assets/green-texture.svg'),
+    linear-gradient(
+      to right,
+      #0f642d 0%,
+      #138740 15%,
+      #138740 85%,
+      #0f642d 100%
+    );
+  background-blend-mode: multiply;
+}
+
+.table-top-left-corner::before {
+  content: '';
+  position: absolute;
+
+  top: 0px;
+  left: 20px;
+  height: 40px;
+  width: 100px;
+  border-top-left-radius: 40px;
+  box-shadow: -60px 0 0 0 #3d2823;
+}
+
+.table-top-right-corner::before {
+  content: '';
+  position: absolute;
+
+  top: 0px;
+  right: 20px;
+  height: 40px;
+  width: 100px;
+  border-top-right-radius: 40px;
+  box-shadow: 60px 0 0 0 #3d2823;
+}
