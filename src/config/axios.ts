@@ -5,16 +5,4 @@ const axiosInstance = axios.create({
   timeout: 10000,
 });
 
-axiosInstance.interceptors.request.use(
-  config => {
-    if (config.url && config.url.startsWith('/api/')) {
-      config.url = config.url.replace('/api/', '/');
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
 export default axiosInstance;
