@@ -1,5 +1,5 @@
 import { cn } from '@utils/cn';
-import type { ClassValue } from 'class-variance-authority/types';
+import type { ClassValue } from 'class-variance-authority/dist/types';
 import type { ComponentProps } from 'react';
 
 interface PrimaryButtonProps

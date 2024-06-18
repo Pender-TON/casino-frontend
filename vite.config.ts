@@ -27,13 +27,6 @@ export default defineConfig(({ command, mode }) => {
     },
     preview: {
       port: 4343,
-      proxy: {
-        '/api': {
-          target: 'http://18.168.48.43:8080',
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
-        },
-      },
     },
     resolve: {
       alias: {

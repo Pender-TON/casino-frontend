@@ -20,7 +20,9 @@
     "noUnusedLocals": true,
 
     /* If transpiling with TypeScript: */
-    "moduleResolution": "Bundler",
+    // "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "moduleResolution": "Node",
 
     /* If your code runs in the DOM: */
     "lib": ["es2022", "dom", "dom.iterable"],
