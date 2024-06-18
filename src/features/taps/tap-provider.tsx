@@ -2,18 +2,12 @@ import { Fragment, type PropsWithChildren } from 'react';
 
 import { TapStore } from '@features/taps';
 import { useInitializeApp } from '@features/initialize-app';
-import { useUserStore } from '@features/user/user-store';
 
 interface TapProviderProps extends PropsWithChildren {}
 
+// Must be wrapped in UserStore.Provider
 export const TapProvider = ({ children }: TapProviderProps) => {
-  const user = useUserStore(store => store.user);
-  const { userId, userName } = user
-
-  const { data: initialTaps } = useInitializeApp({
-    userId,
-    userName,
-  });
+  const { data: initialTaps } = useInitializeApp();
 
   return (
     <Fragment>

@@ -1,11 +1,11 @@
-import axios from '@config/axios'
+import axios from '@config/axios';
 
 type GetDocument = {
   key: 'getDocument:get';
   queryFn: () => Promise<Array<Record<string, string>>>;
 };
 
-const request: GetDocument = {
+export const getDocument: GetDocument = {
   key: 'getDocument:get',
   queryFn: async () => {
     const { data } = await axios.get('getDocument');
@@ -13,5 +13,3 @@ const request: GetDocument = {
     return data;
   },
 };
-
-export default request;

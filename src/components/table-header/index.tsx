@@ -17,16 +17,16 @@ const TableHeader = () => {
         />
 
         <div className={'flex flex-col justify-center gap-0'}>
-          <div className={'flex items-center gap-1'}>
-            <img className={'h-3 w-3'} src={tapCurrency} />
+          <div className={'flex items-center gap-2'}>
+            <img className={'h-5 w-5'} src={tapCurrency} />
 
             <p className={'text-2xl font-bold tabular-nums text-white'}>
               {taps}
             </p>
           </div>
 
-          <div className={'flex items-center gap-1'}>
-            <img className={'h-3 w-3'} src={gem} />
+          <div className={'flex items-center gap-2'}>
+            <img className={'h-5 w-5'} src={gem} />
 
             <p
               className={

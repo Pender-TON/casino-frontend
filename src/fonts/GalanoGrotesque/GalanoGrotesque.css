@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Galano Grotesque';
+  src: url(./GalanoGrotesqueMedium.woff2) format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galano Grotesque';
+  src: url(./GalanoGrotesqueSemiBold.woff2) format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galano Grotesque';
+  src: url(./GalanoGrotesqueHeavy.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}

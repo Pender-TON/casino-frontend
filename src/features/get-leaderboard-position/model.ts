@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import getLeaderboardPosition from '@api/getPosition';
+import { getPosition as getLeaderboardPosition } from '@api/getPosition';
 import { useUserStore } from '@features/user/user-store';
 
 export const useLeaderboardPosition = () => {

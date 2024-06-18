@@ -4,7 +4,7 @@ import TableHeader from '@components/table-header';
 export const Layout = () => {
   return (
     <div className="flex h-full w-full flex-col text-white">
-      <div className="bg-table-desk-bg p-4 ">
+      <div className="bg-table-desk-bg p-4">
         <TableHeader />
       </div>
 

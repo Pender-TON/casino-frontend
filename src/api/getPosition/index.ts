@@ -5,7 +5,7 @@ type GetPosition = {
   queryFn: ({ userId }: { userId: number }) => Promise<{ position: number }>;
 };
 
-const request: GetPosition = {
+export const getPosition: GetPosition = {
   key: 'getPosition:get',
   queryFn: async payload => {
     const { data } = await axios.post('getPosition', { ...payload });
@@ -13,5 +13,3 @@ const request: GetPosition = {
     return data;
   },
 };
-
-export default request;

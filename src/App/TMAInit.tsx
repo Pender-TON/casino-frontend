@@ -1,5 +1,6 @@
 import WebApp from '@twa-dev/sdk';
 import { Fragment, useEffect, type ReactNode } from 'react';
+import { DesktopPlaceholder } from './desktop-placeholder';
 
 interface TMAInitProps {
   children: ReactNode;
@@ -8,9 +9,16 @@ interface TMAInitProps {
 export const TMAInit = ({ children }: TMAInitProps) => {
   useEffect(() => {
     WebApp.expand();
-    WebApp.setHeaderColor('#3D2823');
-    WebApp.setBackgroundColor('#138740');
+    WebApp.setHeaderColor('#261815');
+    WebApp.setBackgroundColor('#261815');
   }, []);
 
-  return <Fragment>{children}</Fragment>;
+
+
+  const isMobile =
+    WebApp.platform === 'android' ||
+    WebApp.platform === 'android_x' ||
+    WebApp.platform === 'ios';
+
+  return <Fragment>{isMobile ? children : <DesktopPlaceholder />}</Fragment>;
 };
