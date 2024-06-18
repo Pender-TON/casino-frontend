@@ -18,7 +18,7 @@ export const TMAInit = ({ children }: TMAInitProps) => {
   const isMobile =
     WebApp.platform === 'android' ||
     WebApp.platform === 'android_x' ||
-    WebApp.platform === 'ios' || true;
+    WebApp.platform === 'ios' || true ;
 
   return <Fragment>{isMobile ? children : <DesktopPlaceholder />}</Fragment>;
 };
