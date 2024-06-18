@@ -25,6 +25,9 @@ export default defineConfig(({ command, mode }) => {
           }
         : {},
     },
+    preview: {
+      port: 4343
+    },
     resolve: {
       alias: {
         '@api': path.resolve('src/api'),
