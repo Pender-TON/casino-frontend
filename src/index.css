@@ -1,29 +1,25 @@
 @import './tailwind.css';
-
-@font-face {
-  font-family: 'Galano Grotesque';
-  src: url(./assets/GalanoGrotesqueHeavy.otf) format('opentype');
-  font-weight: bold;
-  font-style: normal;
-}
+@import './fonts/fonts.css';
 
 html {
   @apply font-sans text-base;
 }
 
+html,
 body,
 #root {
-  height: 100dvh;
   height: 100vh;
-  width: 100dvw;
   width: 100vw;
+  overflow-y: hidden;
 }
 
-html {
-  background-color: #0f642d;
+#root {
+  --table-desk-bg: #3d2823;
+  --table-desk-accent: #713e2b;
+  --table-top-line: #d0e6d8;
 }
 
-body {
+.bg-green-top {
   background-image: url('./assets/green-texture.svg'),
     linear-gradient(
       to right,
@@ -33,13 +29,28 @@ body {
       #0f642d 100%
     );
   background-blend-mode: multiply;
-  margin: 0;
-  padding: 0;
 }
 
-button {
-  -webkit-touch-callout: none;
+.table-top-left-corner::before {
+  content: '';
+  position: absolute;
+
+  top: 0px;
+  left: 20px;
+  height: 40px;
+  width: 100px;
+  border-top-left-radius: 40px;
+  box-shadow: -60px 0 0 0 #3d2823;
 }
-button:active {
-  transform: scale(0.4);
+
+.table-top-right-corner::before {
+  content: '';
+  position: absolute;
+
+  top: 0px;
+  right: 20px;
+  height: 40px;
+  width: 100px;
+  border-top-right-radius: 40px;
+  box-shadow: 60px 0 0 0 #3d2823;
 }
