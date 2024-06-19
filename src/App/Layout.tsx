@@ -8,7 +8,7 @@ export const Layout = () => {
         <TableHeader />
       </div>
 
-      <div className="relative bg-green-top flex h-full w-full flex-col pb-8">
+      <div className="bg-green-top relative flex h-full w-full flex-col pb-8">
         <div className="relative flex h-10 w-full shrink-0">
           <div className="table-top-left-corner" />
           <div className="table-top-right-corner" />
@@ -27,7 +27,7 @@ export const Layout = () => {
           </div>
         </div>
 
-        <div className="absolute flex h-full w-full px-12 pt-7 pb-9">
+        <div className="absolute flex h-full w-full px-12 pb-9 pt-7">
           <Tabletop />
         </div>
       </div>

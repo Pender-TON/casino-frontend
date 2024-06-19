@@ -4,6 +4,7 @@ import './index.css';
 import WebApp from '@twa-dev/sdk';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import smoothscroll from 'smoothscroll-polyfill';
 
 import { App } from './App/index.tsx';
 
@@ -16,6 +17,9 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+// for safari <3
+smoothscroll.polyfill();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

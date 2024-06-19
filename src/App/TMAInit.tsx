@@ -11,9 +11,13 @@ export const TMAInit = ({ children }: TMAInitProps) => {
     WebApp.expand();
     WebApp.setHeaderColor('#261815');
     WebApp.setBackgroundColor('#261815');
+
+    // to avoid slighty scrolled viewport on expanding/collapsing the app
+    WebApp.onEvent(
+      'viewportChanged',
+      ({ isStateStable }) => isStateStable && window.scrollTo({top: 0, behavior: 'smooth'})
+    );
   }, []);
-
-
 
   const isMobile =
     WebApp.platform === 'android' ||
