@@ -23,7 +23,7 @@ const queryClient = new QueryClient({
 smoothscroll.polyfill();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <TonConnectUIProvider manifestUrl="https://pender-lwydwhnl2-pender-mvp.vercel.app/tonconnect-manifest.json">
+  <TonConnectUIProvider manifestUrl="https://pender-tma.vercel.app/tonconnect-manifest.json">
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <App />
