@@ -17,16 +17,19 @@ body,
   --table-desk-bg: #3d2823;
   --table-desk-accent: #713e2b;
   --table-top-line: #d0e6d8;
+  --table-desk-dark: #261815;
+  --table-top-surface-light: #138740;
+  --table-top-surface-dark: #0f642d;
 }
 
 .bg-green-top {
   background-image: url('./assets/green-texture.svg'),
     linear-gradient(
       to right,
-      #0f642d 0%,
-      #138740 15%,
-      #138740 85%,
-      #0f642d 100%
+      var(--table-top-surface-dark) 0%,
+      var(--table-top-surface-light) 15%,
+      var(--table-top-surface-light) 85%,
+      var(--table-top-surface-dark) 100%
     );
   background-blend-mode: multiply;
 }

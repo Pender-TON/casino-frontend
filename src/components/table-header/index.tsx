@@ -4,8 +4,14 @@ import gem from '@assets/gem.svg';
 
 import { useTapStore } from '@features/taps';
 import { LeaderBoard } from './leader-board';
+import { SettingsButton } from './settings';
 
-const TableHeader = () => {
+interface TableHeaderProps {
+  onClickSettings: () => void;
+}
+
+const TableHeader = (props: TableHeaderProps) => {
+  const { onClickSettings } = props;
   const taps = useTapStore(store => store.taps);
 
   return (
@@ -39,7 +45,10 @@ const TableHeader = () => {
         </div>
       </div>
 
-      <LeaderBoard />
+      <div className="flex items-center gap-4">
+        <LeaderBoard />
+        <SettingsButton onClick={onClickSettings}/>
+      </div>
     </div>
   );
 };

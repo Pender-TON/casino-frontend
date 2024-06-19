@@ -13,11 +13,16 @@ export default {
         },
         table: {
           desk: {
+            dark: 'var(--table-desk-dark)',
             bg: 'var(--table-desk-bg)',
             accent: 'var(--table-desk-accent)',
           },
           top: {
             line: 'var(--table-top-line)',
+            surface: {
+              light: 'var(--table-top-surface-light)',
+              dark: 'var(--table-top-surface-dark)',
+            },
           },
         },
       },

@@ -3,8 +3,17 @@ import iconTg from '@assets/icon-telegram.svg';
 import iconTw from '@assets/icon-twitter.svg';
 import iconQuestion from '@assets/icon-question.svg';
 import { PrimaryButton } from '@components/ui/primary-button';
+import { ChevronLast } from 'lucide-react';
 
-export const DesktopPlaceholder = () => {
+interface DesktopPlaceholderProps {
+  onChangeForceDesktop: (force: boolean) => void;
+}
+
+export const DesktopPlaceholder = (props: DesktopPlaceholderProps) => {
+  const { onChangeForceDesktop } = props;
+
+  const handleClickForceDesktop = () => onChangeForceDesktop(true);
+
   return (
     <div className="flex h-full w-full flex-col items-center justify-start gap-10 bg-table-desk-bg bg-[url('src/assets/wood-table-texture.webp')] p-10 text-white bg-blend-multiply">
       <img
@@ -39,6 +48,15 @@ export const DesktopPlaceholder = () => {
             <img className="h-7 w-7" src={iconQuestion} />
           </PrimaryButton>
         </a>
+
+        {import.meta.env.DEV && (
+          <PrimaryButton
+            className={'h-16 w-16'}
+            onClick={handleClickForceDesktop}
+          >
+            <ChevronLast className="h-7 w-7" />
+          </PrimaryButton>
+        )}
       </div>
     </div>
   );

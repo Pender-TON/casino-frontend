@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import WebApp from '@twa-dev/sdk';
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -22,10 +23,12 @@ const queryClient = new QueryClient({
 smoothscroll.polyfill();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-      <ReactQueryDevtools />
-    </QueryClientProvider>
-  </React.StrictMode>
+  <TonConnectUIProvider manifestUrl="https://pender-lwydwhnl2-pender-mvp.vercel.app/tonconnect-manifest.json">
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </React.StrictMode>
+  </TonConnectUIProvider>
 );
