@@ -10,7 +10,7 @@ export const SettingSection = (props: SettingSectionProps) => {
   const { toggleSettings } = props;
 
   return (
-    <div className="flex h-full w-full flex-col justify-between">
+    <div className="flex h-full w-full flex-col justify-between select-none">
       <div>
         <TonConnectButton className="w-full whitespace-nowrap" />
       </div>
