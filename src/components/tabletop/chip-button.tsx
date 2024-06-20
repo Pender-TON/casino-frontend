@@ -1,10 +1,10 @@
-import penderChip from '@assets/pender-chip@3x.webp'
 import { useTapStore } from '@features/taps'
 import { useUpdateTapsMutation } from '@features/taps/update-taps'
 import { useThrottle } from '@uidotdev/usehooks'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useMotionValue, useTime, useTransform, easeOut, type TapHandlers } from 'framer-motion'
 import WebApp from '@twa-dev/sdk'
+import { PenderChip } from '@components/svg/pender-chip'
 
 const THROTTLE_MS = 6000
 const FLYING_TAP_MS = 2000
@@ -43,7 +43,8 @@ const FlyingTap = (props: FlyingTapProps) => {
 
 export const ChipButton = () => {
   const currentTaps = useTapStore(store => store.taps)
-  const initialTaps = useMemo(() => currentTaps, [currentTaps])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const initialTaps = useMemo(() => currentTaps, [])
   const increaseTaps = useTapStore(store => store.increaseTaps)
 
   const [flyingTaps, setFlyingTaps] = useState<FlyingTaps[]>([])
@@ -69,7 +70,7 @@ export const ChipButton = () => {
     // skip initial updates on component mount
     if (currentTaps === initialTaps) return
 
-    syncTaps(throttledTaps)
+    syncTaps()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [throttledTaps])
 
@@ -116,7 +117,7 @@ export const ChipButton = () => {
           onTap={handleTap}
           onTapStart={handleTapStart}
         >
-          <img className="h-52 w-52 select-none" src={penderChip} />
+          <PenderChip className="h-52 w-52 select-none" />
         </motion.button>
       </div>
 

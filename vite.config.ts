@@ -37,7 +37,8 @@ export default defineConfig(({ command, mode }) => {
         '@assets': path.resolve('src/assets'),
         '@utils': path.resolve('src/utils'),
         '@components': path.resolve('src/components'),
-        '@ui': path.resolve('src/components/ui')
+        '@ui': path.resolve('src/components/ui'),
+        '@svg': path.resolve('src/components/svg')
       }
     }
   }

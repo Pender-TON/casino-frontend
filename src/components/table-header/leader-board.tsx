@@ -1,15 +1,24 @@
 import WebApp from '@twa-dev/sdk'
 
 import leaderboardCup from '@assets/leaderboard-cup.svg'
-import { useLeaderboardMutation } from '@features/get-leaderboard'
-import { useLeaderboardPosition } from '@features/get-leaderboard-position'
+
 import { PrimaryButton } from '@components/ui/primary-button'
 
+import { useLeaderboardMutation } from '@features/get-leaderboard'
+import { useLeaderboardPosition } from '@features/get-leaderboard-position'
+import { useUpdateTapsMutation } from '@features/taps/update-taps'
+import { useUserStore } from '@features/user/user-store'
+
 export const LeaderBoard = () => {
-  const { data: positionInfo, isPending: isPendingPosition } = useLeaderboardPosition()
+  const user = useUserStore(store => store.user)
+  const { data: positionInfo, isPending: isPendingPosition } = useLeaderboardPosition(user.userId)
+  const { mutateAsync: syncTaps, isPending: isPendingSyncTaps } = useUpdateTapsMutation()
   const { mutateAsync: getLeaderboard, isPending: isPendingLeaderboard } = useLeaderboardMutation()
 
-  const handleClickLeaderBoard = () => {
+  const handleClickLeaderBoard = async () => {
+    // update taps to get correct leaderboard data
+    await syncTaps()
+
     getLeaderboard(undefined, {
       onSuccess: leaderboard => {
         WebApp.showPopup({
@@ -22,11 +31,11 @@ export const LeaderBoard = () => {
 
   return (
     <PrimaryButton
-      disabled={isPendingLeaderboard}
+      disabled={isPendingLeaderboard || isPendingSyncTaps}
       className={[
         'h-14 w-14',
         {
-          'animate-pulse': isPendingLeaderboard || isPendingPosition
+          'animate-pulse': isPendingLeaderboard || isPendingPosition || isPendingSyncTaps
         }
       ]}
       onClick={handleClickLeaderBoard}

@@ -37,6 +37,7 @@
       "@utils/*": ["src/utils/*"],
       "@components/*": ["src/components/*"],
       "@ui/*": ["src/components/ui/*"],
+      "@svg/*": ["src/components/svg/*"],
     }
   },
   "include": ["./**/*.ts", "./**/*.tsx", ".eslintrc.cjs", ".vitest/setup.tsx"],

@@ -6,15 +6,18 @@ import { useTapStore } from './tap-store'
 
 export const useUpdateTapsMutation = () => {
   const user = useUserStore(store => store.user)
+  const taps = useTapStore(store => store.taps)
+
   const resetTaps = useTapStore(store => store.resetTaps)
 
   const { userId, userName } = user
 
   return useMutation({
     mutationKey: [updateField.key],
-    mutationFn: (count: number) => updateField.queryFn({ count, userId, userName }),
-    onSuccess: (responseCount, payloadCount) => {
-      if (responseCount < payloadCount) {
+    mutationFn: () => updateField.queryFn({ count: taps, userId, userName }),
+    onMutate: () => ({ taps }),
+    onSuccess: (responseCount, _, context) => {
+      if (responseCount < context.taps) {
         resetTaps(responseCount)
       }
     },

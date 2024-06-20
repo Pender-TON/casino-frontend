@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
+import { skipToken, useQuery } from '@tanstack/react-query'
 
 import { dbInit } from '@api/dbInit'
-import { useUserStore } from '@features/user/user-store'
 import { verifySignature } from '@api/verifySignature'
 import { useTonAddress } from '@tonconnect/ui-react'
 
@@ -13,14 +12,11 @@ export const useVerifyInitData = (initData: string) => {
   })
 }
 
-export const useInitializeApp = () => {
-  const user = useUserStore(store => store.user)
-  const { userId, userName } = user
-
+export const useInitializeApp = (userId: number | undefined, userName: string | undefined) => {
   const userFriendlyAddress = useTonAddress()
 
   return useQuery({
     queryKey: [dbInit.key, userId, userName, userFriendlyAddress],
-    queryFn: () => dbInit.queryFn({ userId, userName, address: userFriendlyAddress })
+    queryFn: userId && userName ? () => dbInit.queryFn({ userId, userName, address: userFriendlyAddress }) : skipToken
   })
 }
