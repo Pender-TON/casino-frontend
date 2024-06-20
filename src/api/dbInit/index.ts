@@ -2,7 +2,7 @@ import axios from '@config/axios';
 
 type DbInit = {
   key: 'dbInit:post';
-  queryFn: (payload: { userId: number; userName: string }) => Promise<number>;
+  queryFn: (payload: { userId: number; userName: string; address: string }) => Promise<number>;
 };
 
 export const dbInit: DbInit = {

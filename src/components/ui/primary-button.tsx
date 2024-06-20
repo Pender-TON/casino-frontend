@@ -15,7 +15,7 @@ export const PrimaryButton = (props: PrimaryButtonProps) => {
   return (
     <motion.button
       className={cn(
-        'relative isolate flex h-14 w-14 shrink-0 select-none flex-col items-center justify-center rounded-2xl p-2 text-[#FFC89A]',
+        'relative isolate flex h-14 w-14 shrink-0 select-none flex-col items-center justify-center rounded-2xl p-2 text-primary-accent',
         className
       )}
       transition={{ type: 'spring', duration: 0.3 }}

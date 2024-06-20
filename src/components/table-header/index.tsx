@@ -4,7 +4,7 @@ import gem from '@assets/gem.svg';
 
 import { useTapStore } from '@features/taps';
 import { LeaderBoard } from './leader-board';
-import { SettingsButton } from './settings';
+import { SettingsButton } from './settings-button';
 
 interface TableHeaderProps {
   onClickSettings: () => void;

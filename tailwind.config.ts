@@ -8,9 +8,7 @@ export default {
         sans: ['Galano Grotesque'],
       },
       colors: {
-        pender: {
-          primary: 'var(--pender-primary)',
-        },
+        primary: { accent: 'var(--primary-accent)' },
         table: {
           desk: {
             dark: 'var(--table-desk-dark)',

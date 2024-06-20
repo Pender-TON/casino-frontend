@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { motion, type Transition, type Variant } from 'framer-motion';
-import { TonConnectButton } from '@tonconnect/ui-react';
 
 import { Tabletop } from '@components/tabletop';
 import TableHeader from '@components/table-header';
+import { SettingSection } from '@components/settings-section';
 
 const mainLayoutVariants: Record<string, Variant> = {
   default: {
@@ -82,10 +82,10 @@ export const Layout = () => {
           transition={transitionSettings}
           className="isolate flex w-1/2 shrink-0 flex-col"
         >
-          <div className="-z-1 bg-table-top-surface-dark absolute h-full w-full bg-[url('src/assets/green-texture.svg')] bg-blend-multiply"></div>
+          <div className="-z-1 absolute h-full w-full bg-table-top-surface-dark bg-[url('src/assets/green-texture.svg')] bg-blend-multiply"></div>
           <div className="absolute h-full w-full pb-8">
-            <div className="flex h-full w-full flex-col border-b-4 border-table-desk-accent bg-table-desk-bg p-4">
-              <TonConnectButton className='whitespace-nowrap rounded-2xl' />
+            <div className="flex h-full w-full items-start justify-center border-b-4 border-table-desk-accent bg-table-desk-bg p-4">
+              <SettingSection toggleSettings={toggleSettings} />
             </div>
           </div>
         </motion.div>
