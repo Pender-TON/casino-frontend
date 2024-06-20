@@ -1,42 +1,42 @@
-import { useState } from 'react';
-import { motion, type Transition, type Variant } from 'framer-motion';
+import { useState } from 'react'
+import { motion, type Transition, type Variant } from 'framer-motion'
 
-import { Tabletop } from '@components/tabletop';
-import TableHeader from '@components/table-header';
-import { SettingSection } from '@components/settings-section';
+import { Tabletop } from '@components/tabletop'
+import TableHeader from '@components/table-header'
+import { SettingSection } from '@components/settings-section'
 
 const mainLayoutVariants: Record<string, Variant> = {
   default: {
-    translateX: 0,
+    translateX: 0
   },
   settings: {
-    translateX: '-50%',
-  },
-};
+    translateX: '-50%'
+  }
+}
 
 const transitionSettings: Transition = {
   type: 'spring',
   bounce: 0.5,
-  duration: 0.5,
-};
+  duration: 0.5
+}
 
 const settingsLayoutVariants: Record<string, Variant> = {
   default: {
-    translateX: 0,
+    translateX: 0
   },
   settings: {
-    translateX: '-100%',
-  },
-};
+    translateX: '-100%'
+  }
+}
 
 export const Layout = () => {
-  const [layout, setLayout] = useState<'default' | 'settings'>('default');
+  const [layout, setLayout] = useState<'default' | 'settings'>('default')
 
   const toggleSettings = () => {
-    if (layout === 'default') setLayout('settings');
+    if (layout === 'default') setLayout('settings')
 
-    if (layout === 'settings') setLayout('default');
-  };
+    if (layout === 'settings') setLayout('default')
+  }
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -47,9 +47,9 @@ export const Layout = () => {
       <div className="relative flex h-full w-full overflow-x-hidden">
         <motion.div
           animate={layout}
-          variants={mainLayoutVariants}
-          transition={transitionSettings}
           className="flex h-full w-full shrink-0 select-none flex-col text-white"
+          transition={transitionSettings}
+          variants={mainLayoutVariants}
         >
           <div className="bg-green-top relative flex h-full w-full flex-col overflow-hidden pb-8">
             <div className="relative flex h-10 w-full shrink-0">
@@ -78,9 +78,9 @@ export const Layout = () => {
 
         <motion.div
           animate={layout}
-          variants={settingsLayoutVariants}
-          transition={transitionSettings}
           className="isolate flex w-1/2 shrink-0 flex-col"
+          transition={transitionSettings}
+          variants={settingsLayoutVariants}
         >
           <div className="-z-1 absolute h-full w-full bg-table-top-surface-dark bg-[url('src/assets/green-texture.svg')] bg-blend-multiply"></div>
           <div className="absolute h-full w-full pb-8">
@@ -91,5 +91,5 @@ export const Layout = () => {
         </motion.div>
       </div>
     </div>
-  );
-};
+  )
+}

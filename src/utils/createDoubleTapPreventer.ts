@@ -3,20 +3,20 @@
  * @param timeout_ms - timeout between taps
  */
 export function createDoubleTapPreventer(timeout_ms: number) {
-  let dblTapTimer: NodeJS.Timeout | null = null;
-  let dblTapPressed = false;
+  let dblTapTimer: NodeJS.Timeout | null = null
+  let dblTapPressed = false
 
   return function (e: TouchEvent) {
-    if (dblTapTimer) clearTimeout(dblTapTimer);
+    if (dblTapTimer) clearTimeout(dblTapTimer)
 
     if (dblTapPressed) {
-      e.preventDefault();
-      dblTapPressed = false;
+      e.preventDefault()
+      dblTapPressed = false
     } else {
-      dblTapPressed = true;
+      dblTapPressed = true
       dblTapTimer = setTimeout(() => {
-        dblTapPressed = false;
-      }, timeout_ms);
+        dblTapPressed = false
+      }, timeout_ms)
     }
-  };
+  }
 }

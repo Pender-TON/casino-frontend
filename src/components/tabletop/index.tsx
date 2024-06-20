@@ -1,4 +1,4 @@
-import { ChipButton } from './chip-button';
+import { ChipButton } from './chip-button'
 
 export const Tabletop = () => {
   return (
@@ -11,9 +11,7 @@ export const Tabletop = () => {
       </div>
 
       <div className="w-full shrink-0">
-        <div className="h-16 w-full border-t-2 border-table-top-line">
-          {/* TODO: Upgrades button */}
-        </div>
+        <div className="h-16 w-full border-t-2 border-table-top-line">{/* TODO: Upgrades button */}</div>
 
         <div className="grid h-16 w-full grid-cols-3 divide-x-2 divide-table-top-line border-t-2 border-table-top-line">
           {/* TODO: Mini-games buttons */}
@@ -23,5 +21,5 @@ export const Tabletop = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

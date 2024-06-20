@@ -1,115 +1,103 @@
-import penderChip from '@assets/pender-chip@3x.webp';
-import { useTapStore } from '@features/taps';
-import { useUpdateTapsMutation } from '@features/taps/update-taps';
-import { useThrottle } from '@uidotdev/usehooks';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  motion,
-  useMotionValue,
-  useTime,
-  useTransform,
-  easeOut,
-  type TapHandlers,
-} from 'framer-motion';
-import WebApp from '@twa-dev/sdk';
+import penderChip from '@assets/pender-chip@3x.webp'
+import { useTapStore } from '@features/taps'
+import { useUpdateTapsMutation } from '@features/taps/update-taps'
+import { useThrottle } from '@uidotdev/usehooks'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { motion, useMotionValue, useTime, useTransform, easeOut, type TapHandlers } from 'framer-motion'
+import WebApp from '@twa-dev/sdk'
 
-const THROTTLE_MS = 6000;
-const FLYING_TAP_MS = 2000;
-const FLYING_TAP_Y = 200;
-const MAX_FLYING_TAPS = 20;
+const THROTTLE_MS = 6000
+const FLYING_TAP_MS = 2000
+const FLYING_TAP_Y = 200
+const MAX_FLYING_TAPS = 20
 
 type FlyingTaps = {
-  id: number;
-  x: number;
-  y: number;
-};
+  id: number
+  x: number
+  y: number
+}
 
 interface FlyingTapProps {
-  tap: FlyingTaps;
+  tap: FlyingTaps
 }
 // TODO: Tidy up
 const FlyingTap = (props: FlyingTapProps) => {
-  const { tap } = props;
+  const { tap } = props
 
-  const tapOffset = tap.y - FLYING_TAP_Y;
+  const tapMultiplier = useTapStore(store => store.tapMultiplier)
 
-  const time = useTime();
-  const dynamicY = useTransform(time, [0, FLYING_TAP_MS], [tap.y, tapOffset], {
-    ease: easeOut,
-  });
-  const opacity = useTransform(time, [0, FLYING_TAP_MS], [1, 0]);
+  const time = useTime()
+
+  const tapOffset = tap.y - FLYING_TAP_Y
+  const y = useTransform(time, [0, FLYING_TAP_MS], [tap.y, tapOffset], {
+    ease: easeOut
+  })
+  const opacity = useTransform(time, [0, FLYING_TAP_MS], [1, 0])
 
   return (
-    <motion.div
-      className="absolute text-2xl font-bold"
-      style={{ x: tap.x, y: dynamicY, opacity }}
-    >
-      +1
+    <motion.div className="absolute text-2xl font-bold" style={{ x: tap.x, y, opacity }}>
+      +{tapMultiplier}
     </motion.div>
-  );
-};
+  )
+}
 
 export const ChipButton = () => {
-  const currentTaps = useTapStore(store => store.taps);
-  const initialTaps = useMemo(() => currentTaps, []);
-  const increaseTaps = useTapStore(store => store.increaseTaps);
+  const currentTaps = useTapStore(store => store.taps)
+  const initialTaps = useMemo(() => currentTaps, [currentTaps])
+  const increaseTaps = useTapStore(store => store.increaseTaps)
 
-  const [flyingTaps, setFlyingTaps] = useState<FlyingTaps[]>([]);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const tapRef = useRef(0);
+  const [flyingTaps, setFlyingTaps] = useState<FlyingTaps[]>([])
+  const buttonRef = useRef<HTMLDivElement>(null)
+  const tapRef = useRef(0)
 
   const addFlyingTap = (x: number, y: number) =>
     setFlyingTaps(prev => {
-      const newTap = { id: tapRef.current++, x, y };
+      const newTap = { id: tapRef.current++, x, y }
       if (prev.length >= MAX_FLYING_TAPS) {
-        const slicedTaps = prev.slice(1);
+        const slicedTaps = prev.slice(1)
 
-        return [...slicedTaps, newTap];
+        return [...slicedTaps, newTap]
       }
-      return [...prev, newTap];
-    });
+      return [...prev, newTap]
+    })
 
   // throttle syncing to once per THROTTLE_MS
-  const throttledTaps = useThrottle(currentTaps, THROTTLE_MS);
-  const { mutate: syncTaps } = useUpdateTapsMutation();
+  const throttledTaps = useThrottle(currentTaps, THROTTLE_MS)
+  const { mutate: syncTaps } = useUpdateTapsMutation()
 
   useEffect(() => {
     // skip initial updates on component mount
-    if (currentTaps === initialTaps) return;
+    if (currentTaps === initialTaps) return
 
-    syncTaps(throttledTaps);
-  }, [throttledTaps]);
+    syncTaps(throttledTaps)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [throttledTaps])
 
-  const delayedHapticFeedback = useCallback(
-    (impacType: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft') => {
-      const timeoutId = setTimeout(
-        () => WebApp.HapticFeedback.impactOccurred(impacType),
-        60
-      );
-      return () => clearTimeout(timeoutId);
-    },
-    []
-  );
+  const delayedHapticFeedback = useCallback((impacType: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft') => {
+    const timeoutId = setTimeout(() => WebApp.HapticFeedback.impactOccurred(impacType), 60)
+    return () => clearTimeout(timeoutId)
+  }, [])
 
-  const handleTapChip: TapHandlers['onTap'] = (e, info) => {
-    const { point: tapOriginPoint } = info;
+  const handleTapStart: TapHandlers['onTapStart'] = (e, info) => {
+    const { point: tapOriginPoint } = info
 
-    delayedHapticFeedback('light');
+    const buttonRect = buttonRef.current?.getBoundingClientRect()
+    const buttonX = buttonRect?.x || 0
+    const buttonY = buttonRect?.y || 0
 
-    const buttonRect = buttonRef.current?.getBoundingClientRect();
+    increaseTaps(1)
+    addFlyingTap(tapOriginPoint.x - buttonX, tapOriginPoint.y - buttonY)
+  }
 
-    const buttonX = buttonRect?.x || 0;
-    const buttonY = buttonRect?.y || 0;
+  const handleTap: TapHandlers['onTap'] = () => {
+    const deg = Math.floor(Math.random() * 3) + 1
+    const rotationOffset = Math.random() > 0.5 ? deg : -deg
+    rotate.set(rotationOffset)
 
-    const deg = Math.floor(Math.random() * 3) + 1;
-    const rotationOffset = Math.random() > 0.5 ? deg : -deg;
-    rotate.set(rotationOffset);
+    delayedHapticFeedback('light')
+  }
 
-    increaseTaps(1);
-    addFlyingTap(tapOriginPoint.x - buttonX, tapOriginPoint.y - buttonY);
-  };
-
-  const rotate = useMotionValue(1);
+  const rotate = useMotionValue(1)
 
   return (
     <div className="relative">
@@ -119,13 +107,14 @@ export const ChipButton = () => {
           className="rounded-full"
           style={{ rotate }}
           whileTap={{ scale: 1.05, boxShadow: '12px 12px 16px 0px #0000001F' }}
-          onTap={handleTapChip}
           transition={{
             type: 'spring',
             mass: 0.4,
             stiffness: 1200,
-            damping: 10,
+            damping: 10
           }}
+          onTap={handleTap}
+          onTapStart={handleTapStart}
         >
           <img className="h-52 w-52 select-none" src={penderChip} />
         </motion.button>
@@ -133,9 +122,9 @@ export const ChipButton = () => {
 
       <div className="pointer-events-none absolute left-0 top-0 h-full w-full">
         {flyingTaps.map(tap => {
-          return <FlyingTap key={tap.id} tap={tap} />;
+          return <FlyingTap key={tap.id} tap={tap} />
         })}
       </div>
     </div>
-  );
-};
+  )
+}

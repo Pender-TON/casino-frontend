@@ -1,7 +1,7 @@
-import { TMAInit } from './TMAInit.tsx';
-import { Layout } from './Layout.tsx';
-import { UserProvider } from '@features/user/user-provider.tsx';
-import { TapProvider } from '@features/taps/tap-provider.tsx';
+import { TMAInit } from './TMAInit.tsx'
+import { Layout } from './Layout.tsx'
+import { UserProvider } from '@features/user/user-provider.tsx'
+import { TapProvider } from '@features/taps/tap-provider.tsx'
 
 export const App = () => {
   return (
@@ -12,5 +12,5 @@ export const App = () => {
         </TapProvider>
       </UserProvider>
     </TMAInit>
-  );
-};
+  )
+}
