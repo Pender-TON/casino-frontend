@@ -1,21 +1,22 @@
 import axios from '@config/axios'
-import WebApp from '@twa-dev/sdk'
+
+type UserStats = {
+  auth_date: number
+  id: number
+  is_premium: boolean
+  language_code: string
+  username: string
+
+  count: number
+  address: string | null
+  gems: number
+  multiplier: number
+  tonBalance: number
+}
 
 type VerifySignature = {
   key: 'verifySignature:post'
-  queryFn: (payload: { initData: string }) => Promise<{
-    auth_date: number
-    chat_instance: string
-    chat_type: Exclude<typeof WebApp.initDataUnsafe.chat_type, undefined>
-    user: {
-      allows_write_to_pm: boolean
-      first_name: string
-      id: number
-      language_code: string
-      last_name: string
-      username: string
-    }
-  }>
+  queryFn: (payload: { initData: string }) => Promise<UserStats>
 }
 
 export const verifySignature: VerifySignature = {

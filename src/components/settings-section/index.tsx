@@ -1,6 +1,6 @@
 import { PrimaryButton } from '@components/ui/primary-button'
-import { TonConnectButton } from '@tonconnect/ui-react'
 import { ArrowLeftFromLine } from 'lucide-react'
+import { TonWalletButton } from './ton-wallet-button'
 
 export interface SettingSectionProps {
   toggleSettings: () => void
@@ -12,7 +12,7 @@ export const SettingSection = (props: SettingSectionProps) => {
   return (
     <div className="flex h-full w-full select-none flex-col justify-between">
       <div>
-        <TonConnectButton className="w-full whitespace-nowrap" />
+        <TonWalletButton />
       </div>
 
       <div className="flex w-full justify-end">

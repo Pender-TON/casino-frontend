@@ -5,6 +5,6 @@ import { getPosition as getLeaderboardPosition } from '@api/getPosition'
 export const useLeaderboardPosition = (userId?: number) => {
   return useQuery({
     queryKey: [getLeaderboardPosition.key, userId],
-    queryFn: userId ? () => getLeaderboardPosition.queryFn({ userId }) : skipToken
+    queryFn: userId ? () => getLeaderboardPosition.queryFn({ id: userId }) : skipToken
   })
 }

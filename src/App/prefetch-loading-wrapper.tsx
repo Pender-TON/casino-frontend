@@ -3,10 +3,12 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { type PropsWithChildren } from 'react'
 
 import { LoadingScreen } from '@components/loading-screen'
-import { useInitializeApp, useVerifyInitData } from '@features/initialize-app'
+import { useVerifyInitData } from '@features/initialize-app'
 import { UserStore } from '@features/user/user-store'
 import { TapStore } from '@features/taps'
 import { useLeaderboardPosition } from '@features/get-leaderboard-position'
+import { WalletStore } from '@features/wallet/wallet-store'
+import { useDelayedHapticFeedback } from '@utils/useDelayedHapticFeedback'
 
 interface PrefetchLoadingWrapperProps extends PropsWithChildren {}
 
@@ -14,14 +16,13 @@ export const PrefetchLoadingWrapper = (props: PrefetchLoadingWrapperProps) => {
   const { children } = props
 
   const { data: userInfo, isPending: isPendingUserInfo } = useVerifyInitData(WebApp.initData)
-  const { data: tapCount, isPending: isPendingTapInfo } = useInitializeApp(userInfo?.user.id, userInfo?.user.username)
-  const { data: leaderBoardPosition, isPending: isPendingLeaderboardPosition } = useLeaderboardPosition(
-    userInfo?.user.id
-  )
+  const { data: leaderBoardPosition, isPending: isPendingLeaderboardPosition } = useLeaderboardPosition(userInfo?.id)
 
-  const isPending = isPendingTapInfo || isPendingUserInfo || isPendingLeaderboardPosition
+  const isPending = isPendingUserInfo || isPendingLeaderboardPosition
 
-  const isDataReady = !!userInfo && !!tapCount && !!leaderBoardPosition
+  const isDataReady = !!userInfo && !!leaderBoardPosition
+
+  const delayedHapticFeedback = useDelayedHapticFeedback()
 
   return (
     <AnimatePresence mode="wait">
@@ -43,14 +44,19 @@ export const PrefetchLoadingWrapper = (props: PrefetchLoadingWrapperProps) => {
           initial={{ x: '100%' }}
           key={'prefetch-children'}
           transition={{ type: 'spring', duration: 0.6 }}
+          onAnimationStart={() => {
+            delayedHapticFeedback('soft', 300)
+          }}
         >
           <UserStore.Provider
             initialValue={{
-              userId: userInfo.user.id,
-              userName: userInfo.user.username
+              userId: userInfo.id,
+              userName: userInfo.username
             }}
           >
-            <TapStore.Provider initialValue={{ taps: tapCount, tapMultiplier: 1 }}>{children}</TapStore.Provider>
+            <TapStore.Provider initialValue={{ taps: userInfo.count, tapMultiplier: userInfo.multiplier }}>
+              <WalletStore.Provider initialValue={{ address: userInfo.address }}>{children}</WalletStore.Provider>
+            </TapStore.Provider>
           </UserStore.Provider>
         </motion.div>
       )}

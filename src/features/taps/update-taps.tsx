@@ -14,7 +14,7 @@ export const useUpdateTapsMutation = () => {
 
   return useMutation({
     mutationKey: [updateField.key],
-    mutationFn: () => updateField.queryFn({ count: taps, userId, userName }),
+    mutationFn: () => updateField.queryFn({ count: taps, id: userId, userName }),
     onMutate: () => ({ taps }),
     onSuccess: (responseCount, _, context) => {
       if (responseCount < context.taps) {

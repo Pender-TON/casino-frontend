@@ -1,10 +1,10 @@
 import { useTapStore } from '@features/taps'
 import { useUpdateTapsMutation } from '@features/taps/update-taps'
 import { useThrottle } from '@uidotdev/usehooks'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useMotionValue, useTime, useTransform, easeOut, type TapHandlers } from 'framer-motion'
-import WebApp from '@twa-dev/sdk'
 import { PenderChip } from '@components/svg/pender-chip'
+import { useDelayedHapticFeedback } from '@utils/useDelayedHapticFeedback'
 
 const THROTTLE_MS = 6000
 const FLYING_TAP_MS = 2000
@@ -74,10 +74,7 @@ export const ChipButton = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [throttledTaps])
 
-  const delayedHapticFeedback = useCallback((impacType: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft') => {
-    const timeoutId = setTimeout(() => WebApp.HapticFeedback.impactOccurred(impacType), 60)
-    return () => clearTimeout(timeoutId)
-  }, [])
+  const delayedHapticFeedback = useDelayedHapticFeedback()
 
   const handleTapStart: TapHandlers['onTapStart'] = (e, info) => {
     const { point: tapOriginPoint } = info
@@ -95,7 +92,7 @@ export const ChipButton = () => {
     const rotationOffset = Math.random() > 0.5 ? deg : -deg
     rotate.set(rotationOffset)
 
-    delayedHapticFeedback('light')
+    delayedHapticFeedback('light', 60)
   }
 
   const rotate = useMotionValue(1)

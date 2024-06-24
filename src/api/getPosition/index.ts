@@ -2,13 +2,14 @@ import axios from '@config/axios'
 
 type GetPosition = {
   key: 'getPosition:get'
-  queryFn: ({ userId }: { userId: number }) => Promise<{ position: number }>
+  queryFn: ({ id }: { id: number }) => Promise<{ position: number }>
 }
 
 export const getPosition: GetPosition = {
   key: 'getPosition:get',
   queryFn: async payload => {
-    const { data } = await axios.post('getPosition', { ...payload })
+    const { id } = payload
+    const { data } = await axios.post('getPosition', { id })
 
     return data
   }

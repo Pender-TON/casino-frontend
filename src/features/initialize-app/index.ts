@@ -1,1 +1,1 @@
-export { useInitializeApp, useVerifyInitData } from './model'
+export { useVerifyInitData } from './model'

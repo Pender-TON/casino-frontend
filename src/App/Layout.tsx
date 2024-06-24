@@ -4,6 +4,7 @@ import { motion, type Transition, type Variant } from 'framer-motion'
 import { Tabletop } from '@components/tabletop'
 import TableHeader from '@components/table-header'
 import { SettingSection } from '@components/settings-section'
+import { useDelayedHapticFeedback } from '@utils/useDelayedHapticFeedback'
 
 const mainLayoutVariants: Record<string, Variant> = {
   default: {
@@ -32,7 +33,10 @@ const settingsLayoutVariants: Record<string, Variant> = {
 export const Layout = () => {
   const [layout, setLayout] = useState<'default' | 'settings'>('default')
 
+  const delayedHapticFeedback = useDelayedHapticFeedback()
+
   const toggleSettings = () => {
+    delayedHapticFeedback('soft', 100)
     if (layout === 'default') setLayout('settings')
 
     if (layout === 'settings') setLayout('default')
