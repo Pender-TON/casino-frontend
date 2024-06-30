@@ -8,7 +8,6 @@ import { UserStore } from '@features/user/user-store'
 import { TapStore } from '@features/taps'
 import { useLeaderboardPosition } from '@features/get-leaderboard-position'
 import { WalletStore } from '@features/wallet/wallet-store'
-import { useDelayedHapticFeedback } from '@utils/useDelayedHapticFeedback'
 
 interface PrefetchLoadingWrapperProps extends PropsWithChildren {}
 
@@ -22,15 +21,13 @@ export const PrefetchLoadingWrapper = (props: PrefetchLoadingWrapperProps) => {
 
   const isDataReady = !!userInfo && !!leaderBoardPosition
 
-  const delayedHapticFeedback = useDelayedHapticFeedback()
-
   return (
     <AnimatePresence mode="wait">
       {isPending || !isDataReady ? (
         <motion.div
-          animate={{ x: 0, opacity: 1 }}
+          animate={{ opacity: 1 }}
           className="flex h-full w-full flex-col"
-          exit={{ x: '-80%' }}
+          exit={{ x: '80%' }}
           initial={{ x: 0, opacity: 0.5 }}
           key={'prefetch-loading-screen'}
           transition={{ type: 'spring', duration: 0.4 }}
@@ -38,16 +35,7 @@ export const PrefetchLoadingWrapper = (props: PrefetchLoadingWrapperProps) => {
           <LoadingScreen />
         </motion.div>
       ) : (
-        <motion.div
-          animate={{ x: 0 }}
-          className="flex h-full w-full flex-col"
-          initial={{ x: '100%' }}
-          key={'prefetch-children'}
-          transition={{ type: 'spring', duration: 0.6 }}
-          onAnimationStart={() => {
-            delayedHapticFeedback('soft', 300)
-          }}
-        >
+        <div className="flex h-full w-full flex-col">
           <UserStore.Provider
             initialValue={{
               userId: userInfo.id,
@@ -58,7 +46,7 @@ export const PrefetchLoadingWrapper = (props: PrefetchLoadingWrapperProps) => {
               <WalletStore.Provider initialValue={{ address: userInfo.address }}>{children}</WalletStore.Provider>
             </TapStore.Provider>
           </UserStore.Provider>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   )

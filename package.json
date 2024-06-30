@@ -13,6 +13,8 @@
   "dependencies": {
     "@tanstack/react-query": "^5.45.0",
     "@tanstack/react-query-devtools": "^5.45.1",
+    "@tma.js/sdk-react": "^2.2.5",
+    "@tonconnect/sdk": "^3.0.3",
     "@tonconnect/ui-react": "^2.0.5",
     "@twa-dev/sdk": "^7.0.0",
     "@types/lodash": "^4.17.4",
@@ -28,6 +30,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-remove-scroll": "^2.5.10",
+    "react-router-dom": "^6.24.0",
     "react-spring": "^9.7.3",
     "realm-web": "^2.0.0",
     "smoothscroll-polyfill": "^0.4.4",

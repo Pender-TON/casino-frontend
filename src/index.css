@@ -15,12 +15,12 @@ body,
 
 #root {
   --table-desk-bg: #3d2823;
-  --table-desk-accent: #713e2b;
+  --table-desk-accent: #714b42;
   --table-top-line: #d0e6d8;
   --table-desk-dark: #261815;
   --table-top-surface-light: #138740;
   --table-top-surface-dark: #0f642d;
-  --primary-accent: #FFC89A;
+  --primary-accent: #ffc89a;
 }
 
 .bg-green-top {

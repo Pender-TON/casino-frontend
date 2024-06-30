@@ -25,6 +25,7 @@ export default {
         }
       },
       backgroundImage: {
+        'bronze-gradient': 'linear-gradient(220.04deg, #FFC89A 0%, #99785C 100%)',
         gradient: 'linear-gradient(to right, #0F642D 0%, #138740 15%, #138740 85%, #0F642D 100%)',
         texture: 'url("/src/assets/green-texture.svg")'
       }

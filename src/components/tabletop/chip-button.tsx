@@ -3,7 +3,7 @@ import { useUpdateTapsMutation } from '@features/taps/update-taps'
 import { useThrottle } from '@uidotdev/usehooks'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useMotionValue, useTime, useTransform, easeOut, type TapHandlers } from 'framer-motion'
-import { PenderChip } from '@components/svg/pender-chip'
+import { PenderChipWhite } from '@components/svg/pender-chip-white'
 import { useDelayedHapticFeedback } from '@utils/useDelayedHapticFeedback'
 
 const THROTTLE_MS = 6000
@@ -32,10 +32,13 @@ const FlyingTap = (props: FlyingTapProps) => {
   const y = useTransform(time, [0, FLYING_TAP_MS], [tap.y, tapOffset], {
     ease: easeOut
   })
-  const opacity = useTransform(time, [0, FLYING_TAP_MS], [1, 0])
+  const opacity = useTransform(time, [0, FLYING_TAP_MS * 0.6, FLYING_TAP_MS], [1, 0.8, 0])
 
   return (
-    <motion.div className="absolute text-2xl font-bold" style={{ x: tap.x, y, opacity }}>
+    <motion.div
+      className="absolute text-2xl font-bold drop-shadow-[0_0_3px_rgba(0,0,0,0.5)]"
+      style={{ x: tap.x, y, opacity }}
+    >
       +{tapMultiplier}
     </motion.div>
   )
@@ -114,7 +117,7 @@ export const ChipButton = () => {
           onTap={handleTap}
           onTapStart={handleTapStart}
         >
-          <PenderChip className="h-52 w-52 select-none" />
+          <PenderChipWhite className="h-52 w-52 select-none" />
         </motion.button>
       </div>
 

@@ -27,25 +27,25 @@ export const TMAInit = ({ children }: TMAInitProps) => {
   }, [])
 
   useEffect(() => {
-    setOptions({
-      uiPreferences: {
-        borderRadius: 's',
-        colorsSet: {
-          LIGHT: {
-            connectButton: {
-              background: 'linear-gradient(225deg, #B58B56 0%, #803B24 100%)',
-              foreground: 'var(--primary-accent)'
-            }
-          },
-          DARK: {
-            connectButton: {
-              background: '#803B24',
-              foreground: 'var(--primary-accent)'
-            }
-          }
-        }
-      }
-    })
+    // setOptions({
+    //   uiPreferences: {
+    //     borderRadius: 's',
+    //     colorsSet: {
+    //       LIGHT: {
+    //         connectButton: {
+    //           background: 'linear-gradient(225deg, #B58B56 0%, #803B24 100%)',
+    //           foreground: 'var(--primary-accent)'
+    //         }
+    //       },
+    //       DARK: {
+    //         connectButton: {
+    //           background: '#803B24',
+    //           foreground: 'var(--primary-accent)'
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
   }, [setOptions])
 
   const handleChangeDesktop = (force: boolean) => setForceDesktop(force)

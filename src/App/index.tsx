@@ -1,12 +1,12 @@
 import { TMAInit } from './TMAInit.tsx'
-import { Layout } from './Layout.tsx'
+import { MainRouter } from './main-router.tsx'
 import { PrefetchLoadingWrapper } from './prefetch-loading-wrapper.tsx'
 
 export const App = () => {
   return (
     <TMAInit>
       <PrefetchLoadingWrapper>
-        <Layout />
+        <MainRouter />
       </PrefetchLoadingWrapper>
     </TMAInit>
   )

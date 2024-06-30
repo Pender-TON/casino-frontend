@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import smoothscroll from 'smoothscroll-polyfill'
 
 import { App } from './App/index.tsx'
+import { BrowserRouter } from 'react-router-dom'
 
 WebApp.ready()
 
@@ -23,12 +24,14 @@ const queryClient = new QueryClient({
 smoothscroll.polyfill()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <TonConnectUIProvider manifestUrl="https://pender-tma.vercel.app/tonconnect-manifest.json">
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </React.StrictMode>
-  </TonConnectUIProvider>
+  <React.StrictMode>
+    <BrowserRouter>
+      <TonConnectUIProvider manifestUrl="https://pender-tma.vercel.app/tonconnect-manifest.json">
+        <QueryClientProvider client={queryClient}>
+          <App />
+          <ReactQueryDevtools />
+        </QueryClientProvider>
+      </TonConnectUIProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 )

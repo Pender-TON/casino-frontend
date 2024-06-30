@@ -3,10 +3,14 @@ import { TonConnectButton, useTonAddress } from '@tonconnect/ui-react'
 
 import { useUpdateWalletAddress } from '@features/wallet/update-wallet-address'
 import { useWalletStore } from '@features/wallet/wallet-store'
+import { cn } from '@utils/cn'
 
-export interface TonWalletButtonProps {}
+export interface TonWalletButtonProps {
+  className?: string
+}
 
 export const TonWalletButton = (props: TonWalletButtonProps) => {
+  const { className } = props
   const tonApiWalletAddress = useTonAddress()
   const walletAddress = useWalletStore(store => store.walletAddress)
 
@@ -20,5 +24,5 @@ export const TonWalletButton = (props: TonWalletButtonProps) => {
     }
   }, [tonApiWalletAddress, walletAddress, updateAddress])
 
-  return <TonConnectButton className="w-full whitespace-nowrap" />
+  return <TonConnectButton className={cn('', className)} />
 }
