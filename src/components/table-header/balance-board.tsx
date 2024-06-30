@@ -21,7 +21,7 @@ export const BalanceBoard = (props: BalanceBoardProps) => {
 
         <div className="absolute bottom-0 flex translate-y-1/2 items-center justify-center gap-1 rounded-full border border-white border-opacity-[0.32] bg-table-desk-bg px-2 py-1">
           <ChipGradientIcon className="h-2 w-2" />
-          <p className="text-xs font-semibold tabular-nums leading-[11.76px] text-white">{tapMultiplier}+/Tap</p>
+          <p className="text-xs font-semibold tabular-nums leading-[11.76px] text-white">+{tapMultiplier}/Tap</p>
         </div>
       </div>
     </div>
