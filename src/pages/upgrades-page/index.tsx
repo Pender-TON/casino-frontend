@@ -22,7 +22,7 @@ export const UpgradesPage = () => {
 
   return (
     <motion.div
-      className="flex h-full w-full select-none flex-col items-center justify-start gap-5 px-5 pt-3"
+      className="flex h-full w-full select-none flex-col items-center justify-start gap-5 overflow-y-scroll px-5 pb-14 pt-3"
       transition={{ type: 'tween', ease: 'easeInOut', duration: 0.2 }}
       animate={{
         x: '0%',
@@ -57,6 +57,10 @@ export const UpgradesPage = () => {
           <ArrowLeftFromLine className="h-8 w-8" />
         </PrimaryButton>
       </Link>
+
+      <a className="mt-auto" href={'https://thepender.com/PrivacyPolicy.pdf'} rel="noopener noreferrer" target="_blank">
+        <p className="underline-offset-3 text-xl font-semibold leading-[21.6px] text-white underline">Privacy policy</p>
+      </a>
     </motion.div>
   )
 }
