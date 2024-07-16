@@ -1,16 +1,13 @@
-import { TMAInit } from './TMAInit.tsx';
-import { Layout } from './Layout.tsx';
-import { UserProvider } from '@features/user/user-provider.tsx';
-import { TapProvider } from '@features/taps/tap-provider.tsx';
+import { TMAInit } from './TMAInit.tsx'
+import { MainRouter } from './main-router.tsx'
+import { PrefetchLoadingWrapper } from './prefetch-loading-wrapper.tsx'
 
 export const App = () => {
   return (
     <TMAInit>
-      <UserProvider>
-        <TapProvider>
-          <Layout />
-        </TapProvider>
-      </UserProvider>
+      <PrefetchLoadingWrapper>
+        <MainRouter />
+      </PrefetchLoadingWrapper>
     </TMAInit>
-  );
-};
+  )
+}

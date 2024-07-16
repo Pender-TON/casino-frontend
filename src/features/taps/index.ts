@@ -1,1 +1,1 @@
-export { TapStore, useTapStore } from './tap-store';
+export { TapStore, useTapStore } from './tap-store'

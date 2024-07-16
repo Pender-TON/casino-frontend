@@ -1,12 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
+import { skipToken, useQuery } from '@tanstack/react-query'
 
-import { getPosition as getLeaderboardPosition } from '@api/getPosition';
-import { useUserStore } from '@features/user/user-store';
+import { getPosition as getLeaderboardPosition } from '@api/getPosition'
 
-export const useLeaderboardPosition = () => {
-  const user = useUserStore(store => store.user);
+export const useLeaderboardPosition = (userId?: number) => {
   return useQuery({
-    queryKey: [getLeaderboardPosition.key],
-    queryFn: () => getLeaderboardPosition.queryFn({ userId: user.userId }),
-  });
-};
+    queryKey: [getLeaderboardPosition.key, userId],
+    queryFn: userId ? () => getLeaderboardPosition.queryFn({ id: userId }) : skipToken
+  })
+}

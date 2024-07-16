@@ -1,12 +1,12 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import basicSsl from '@vitejs/plugin-basic-ssl';
-import fs from 'fs';
-import path from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import basicSsl from '@vitejs/plugin-basic-ssl'
+import fs from 'fs'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  const isDev = mode === 'development';
+  const isDev = mode === 'development'
   return {
     plugins: [react(), basicSsl()],
     server: {
@@ -15,19 +15,19 @@ export default defineConfig(({ command, mode }) => {
         '/api': {
           target: 'https://visto.team',
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
-        },
+          rewrite: path => path.replace(/^\/api/, '')
+        }
       },
       changeOrigin: true,
       https: isDev
         ? {
             key: fs.readFileSync('./server.key'),
-            cert: fs.readFileSync('./server.crt'),
+            cert: fs.readFileSync('./server.crt')
           }
-        : {},
+        : {}
     },
     preview: {
-      port: 4343,
+      port: 4343
     },
     resolve: {
       alias: {
@@ -36,9 +36,11 @@ export default defineConfig(({ command, mode }) => {
         '@config': path.resolve('src/config'),
         '@assets': path.resolve('src/assets'),
         '@utils': path.resolve('src/utils'),
+        '@pages': path.resolve('src/pages'),
         '@components': path.resolve('src/components'),
         '@ui': path.resolve('src/components/ui'),
-      },
-    },
-  };
-});
+        '@svg': path.resolve('src/components/svg')
+      }
+    }
+  }
+})
